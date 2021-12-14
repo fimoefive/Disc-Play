@@ -7,5 +7,6 @@ namespace Disc_Play.Models
 {
   public class Game
   {
+
   }
 }
