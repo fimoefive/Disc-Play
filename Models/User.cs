@@ -5,11 +5,7 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Models
 {
-  public class Message
+  public class User
   {
-    //	Message Forum Properties
-    public int MessageID { get; set; }
-    public int UserID { get; set; }
-
   }
 }

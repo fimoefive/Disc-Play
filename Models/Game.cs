@@ -7,6 +7,8 @@ namespace Disc_Play.Models
 {
   public class Game
   {
-
+    //	Game Properties
+    public int GameID { get; set; }
+    public int UserID { get; set; }
   }
 }
