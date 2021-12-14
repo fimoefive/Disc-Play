@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Controllers
 {
-  public class GamesController : Controller
+  public class MessageController : Controller
   {
-    // GET: GamesController
+    // GET: MessagesController
     public ActionResult Index()
     {
       return View();
     }
 
-    // GET: GamesController/Details/5
+    // GET: MessagesController/Details/5
     public ActionResult Details(int id)
     {
       return View();
     }
 
-    // GET: GamesController/Create
+    // GET: MessagesController/Create
     public ActionResult Create()
     {
       return View();
     }
 
-    // POST: GamesController/Create
+    // POST: MessagesController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Create(IFormCollection collection)
@@ -42,13 +42,13 @@ namespace Disc_Play.Controllers
       }
     }
 
-    // GET: GamesController/Edit/5
+    // GET: MessagesController/Edit/5
     public ActionResult Edit(int id)
     {
       return View();
     }
 
-    // POST: GamesController/Edit/5
+    // POST: MessagesController/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Edit(int id, IFormCollection collection)
@@ -63,13 +63,13 @@ namespace Disc_Play.Controllers
       }
     }
 
-    // GET: GamesController/Delete/5
+    // GET: MessagesController/Delete/5
     public ActionResult Delete(int id)
     {
       return View();
     }
 
-    // POST: GamesController/Delete/5
+    // POST: MessagesController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Delete(int id, IFormCollection collection)
