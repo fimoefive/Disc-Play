@@ -11,7 +11,8 @@ namespace Disc_Play.DataAccess
 {
   public class UserRepository
   {
-      static List<User> _users = new List<User>();
+    //  User List Method
+    static List<User> _users = new List<User>();
       readonly string _connectionString;
 
       // Connection configuration string in Startup
