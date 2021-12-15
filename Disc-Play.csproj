@@ -13,7 +13,6 @@
   <ItemGroup>
     <Content Include="obj\Disc-Play.csproj.nuget.dgspec.json" />
     <Content Include="obj\project.assets.json" />
-    <Content Include="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
