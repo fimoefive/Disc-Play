@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Disc_Play.Models
+namespace Disc_Play.DataAccess
 {
-  public class Message
+  public class UserRepository
   {
   }
 }
