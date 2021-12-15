@@ -11,7 +11,7 @@ namespace Disc_Play.DataAccess
 {
   public class MessageRepository
   {
-    //  MessageForum List Method
+    //  MessageForum Static List Method
     static List<MessageForum> _messages = new List<MessageForum>();
     readonly string _connectionString;
 
