@@ -145,5 +145,18 @@ namespace Disc_Play.DataAccess
       return user;
     }
 
+    internal bool IsAUser(string uID)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"IF EXISTS(SELECT *
+                  FROM USER
+                  WHERE UID=@uID) SELECT 1 ELSE SELECT 0";
+
+      var result = db.QueryFirstOrDefault<bool>(sql, new { uID });
+
+      return result;
+    }
+
   }
 }

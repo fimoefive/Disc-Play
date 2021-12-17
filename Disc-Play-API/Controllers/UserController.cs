@@ -9,81 +9,110 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Controllers
 {
-  public class UserController : Controller
+  [Route("api/user")]
+  [ApiController]
+  public class UserController : Controller  // ControllerBase
   {
-    // GET: UserController
-    public ActionResult Index()
+    UserRepository _repo;
+
+    public UserController(UserRepository repo)
     {
-      return View();
+      _repo = repo;
     }
 
-    // GET: UserController/Details/5
-    public ActionResult Details(int id)
+    // GET: GETALLUSERS UserController
+    [HttpGet]
+    public List<User> GETALLUSERS()
     {
-      return View();
+      return _repo.GetAllUsers();
     }
 
-    // GET: UserController/Create
-    public ActionResult Create()
+    // GET: GETBYUSERID UserController/userID/{id}
+    [HttpGet("GETBYUSERID/{userID}")]
+    public List<User> GETBYUSERID(string userID)
     {
-      return View();
+      return _repo.GetUserByUserID(userID);
     }
 
-    // POST: UserController/Create
+    // GET: UserController/{ID}
+    [HttpGet("{ID}")]
+    public IActionResult GETUSERBYID(int ID)
+    {
+      var user = _repo.GetUserByIDFromDB(ID);
+
+      if (user == null)
+      {
+        return NotFound($"No user with the ID of {ID} was found");
+      }
+      return Ok(user);
+    }
+
+    //  GET: User/FirstName
+    [HttpGet("CGetUserFirstFromList/{firstName}")]
+    public IEnumerable<User> CGetUserFirstFromList(string firstName)
+    {
+      return _repo.GetUserByNameFromList(firstName);
+    }
+
+    [HttpGet("CGetUserByNameFromDB/{firstName}")]
+    public User CGetUserByNameFromDB(string firstName)
+    {
+      return _repo.GetUserByNameFromDB(firstName);
+    }
+
+    // POST: UserController/AddUser
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public IActionResult AddUser(User newUser)
     {
-      try
+      if (string.IsNullOrEmpty(newUser.FirstName) ||
+         string.IsNullOrEmpty(newUser.LastName) ||
+         string.IsNullOrEmpty(newUser.Email))
       {
-        return RedirectToAction(nameof(Index));
+        return BadRequest("User information fields and Payment ID are required");
       }
-      catch
-      {
-        return View();
-      }
+      _repo.Add(newUser);
+
+        return Created($"api/user/{newUser.UserID}", newUser);
     }
 
-    // GET: UserController/Edit/5
-    public ActionResult Edit(int id)
+    // GET: UserController/Edit/{ID}
+    [HttpPut("{ID}")]
+    public IActionResult Edit(int ID, User user)
     {
-      return View();
+      var userToUpdate = _repo.GetUserByIDFromDB(ID);
+
+      if (userToUpdate == null)
+      {
+        return NotFound($"Could not find user with that ID of {ID} for updating.");
+      }
+
+      var updateUser = _repo.UpdateUser(ID, user);
+      return Ok(updateUser);
     }
 
-    // POST: UserController/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
+    // DELETE: UserController/Delete/{ID}
+    [HttpDelete("{ID}")]
+    public IActionResult Delete(int ID)
     {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
+      _repo.RemoveUser(ID);
+
+      return Ok();
     }
 
-    // GET: UserController/Delete/5
-    public ActionResult Delete(int id)
+    // GET: validateUse/{UID}
+    [HttpGet("validateUser/{uID}")]
+    public bool validateUser(string uID)
     {
-      return View();
+      return _repo.IsAUser(uID);
     }
 
-    // POST: UserController/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
+    // GET: GETUserByUID/{UID}
+    [HttpGet("GetUserByUID/{uID}")]
+    public User GETUserByUID(string uID)
     {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
+      return _repo.GetByUserUID(uID);
     }
+
+
   }
 }
