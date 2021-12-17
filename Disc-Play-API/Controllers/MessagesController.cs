@@ -9,81 +9,90 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Controllers
 {
+  [Route("api/message_forum")]
+  [ApiController]
   public class MessagesController : Controller
   {
-    // GET: MessagesController
-    public ActionResult Index()
+    MessageRepository _repo;
+
+    public MessagesController(MessageRepository repo)
     {
-      return View();
+      _repo = repo;
+    }
+
+    // GetALLMESSAGES: MessagesController
+    [HttpGet]
+    public List<MessageForum> GetAllMESSAGES()
+    {
+      return _repo.GetAllMessages();
     }
 
     // GET: MessagesController/Details/5
-    public ActionResult Details(int id)
+    public ActionResult Details(int ID)
     {
       return View();
     }
 
-    // GET: MessagesController/Create
-    public ActionResult Create()
+    // GETMessageID: MessagesController/{MessageID}
+    [HttpGet("GetMessageByMessageID/{messageID}")]
+    public List<MessageForum> GETMessageByMessageID(string messageID)
     {
-      return View();
+      return _repo.GetMessageByMessageID(messageID);
     }
 
-    // POST: MessagesController/Create
+    // GET: MessageID IACTION
+    [HttpGet("{messageID}")]
+    public IActionResult GetMessageBYID(int messageID)
+    {
+      var message = _repo.GetByIDFromDB(messageID);
+
+      if (message == null)
+      {
+        return NotFound($"No payment with ID of {messageID} was found.");
+      }
+      return Ok(message);
+    }
+
+
+    // POST: MessagesController/CreateMessage
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public IActionResult CreateMessage(MessageForum newMessage)
     {
-      try
+      if (string.IsNullOrEmpty(newMessage.Message) ||
+           newMessage.MessageID.Equals(string.Empty))
       {
-        return RedirectToAction(nameof(Index));
+        return BadRequest("Text is a required field");
       }
-      catch
+      _repo.Add(newMessage);
+
+        return Created($"/api/message_forum/{newMessage.MessageID}", newMessage);
+    }
+
+    //  PUT: MessagesController/Edit/{MessageID}
+    [HttpPut("{ID}")]
+    public IActionResult UpdateMessage(int ID, MessageForum message)
+    {
+      var messageUpdate = _repo.GetByIDFromDB(ID);
+
+      if (messageUpdate == null)
       {
-        return View();
+        return NotFound($"Could not find message with ID of {ID} to update");
+      }
+      var updatedMessage = _repo.UpdateMessage(ID, message);
+
+      {
+        return Ok(updatedMessage);
       }
     }
 
-    // GET: MessagesController/Edit/5
-    public ActionResult Edit(int id)
+    // DELETE: MessagesController/Delete/{MessageID}
+    [HttpDelete("{ID}")]
+    public IActionResult DeleteMessage(int ID)
     {
-      return View();
+      _repo.RemoveMessage(ID);
+
+      return Ok();
     }
 
-    // POST: MessagesController/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
-    {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
-    }
-
-    // GET: MessagesController/Delete/5
-    public ActionResult Delete(int id)
-    {
-      return View();
-    }
-
-    // POST: MessagesController/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
-    {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
-    }
   }
 }
