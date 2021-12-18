@@ -51,7 +51,7 @@ namespace Disc_Play.DataAccess
     }
 
     //  GetGameByGameID Method
-    internal List<Game> GetGameByGameID(int gameID)
+    internal List<Game> GetGameByGameID(string gameID)
     {
       using var db = new SqlConnection(_connectionString);
       var temp = db.Query<Game>("SELECT * FROM GAME WHERE GameID = @gameID", new { gameID }).ToList();

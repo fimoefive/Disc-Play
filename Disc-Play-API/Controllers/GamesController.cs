@@ -9,81 +9,96 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Controllers
 {
+  [Route("api/games")]
+  [ApiController]
   public class GamesController : Controller
   {
-    // GET: GamesController
-    public ActionResult Index()
+    GameRepository _repo;
+
+    public GamesController(GameRepository repo)
     {
-      return View();
+      _repo = repo;
+    }
+
+    // GET: GamesController
+    [HttpGet]
+    public List<Game> GetAllGames()
+    {
+      return _repo.GetAllGames();
     }
 
     // GET: GamesController/Details/5
-    public ActionResult Details(int id)
+    [HttpGet("GetGameByGameID/{gameID}")]
+    public List<Game> GetGameByGameID(string gameID)
     {
-      return View();
+      return _repo.GetGameByGameID(gameID);
     }
 
-    // GET: GamesController/Create
-    public ActionResult Create()
+    // GET: GamesController/GameID
+    [HttpGet("{gameID}")]
+    public IActionResult GETGameByID(int gameID)
     {
-      return View();
+      var game = _repo.GetGameByID(gameID);
+
+      if (game == null)
+      {
+        return NotFound($"No game with ID of {gameID} was found.");
+      }
+      return Ok(game);
+    }
+
+    // GET: GamesController/{course}
+    [HttpGet("GetCourseFromList/{course}")]
+    public IEnumerable<Game> GETCourseByList(string course)
+    {
+      return _repo.GetCourseFromList(course);
+    }
+
+    // GET: GamesController/{course}
+    [HttpGet("GetCourseFromDB/{course}")]
+    public Game GETCourseByDB(string course)
+    {
+      return _repo.GetCourseFromDB(course);
     }
 
     // POST: GamesController/Create
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public IActionResult Create(Game newGame)
     {
-      try
+      if (string.IsNullOrEmpty(newGame.Course) ||
+          newGame.GameID.Equals(string.Empty)
+          )
       {
-        return RedirectToAction(nameof(Index));
+        return BadRequest("Course is a required field");
       }
-      catch
-      {
-        return View();
-      }
+      _repo.Add(newGame);
+
+      return Created($"/api/games/{newGame.GameID}", newGame);
     }
 
-    // GET: GamesController/Edit/5
-    public ActionResult Edit(int id)
+    // PUT: GamesController/Edit/{gameID}
+    [HttpPut("{ID}")]
+    public IActionResult Edit(int ID, Game game)
     {
-      return View();
+      var gameUpdate = _repo.GetByIDFromDB(ID);
+
+      if (gameUpdate == null)
+      {
+        return NotFound($"Could not find game with ID of {ID} to update");
+      }
+      var updatedGame = _repo.UpdateGame(ID, game);
+
+      return Ok(updatedGame);
     }
 
-    // POST: GamesController/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
+    // DELETE: GamesController/Delete/{gameID}
+    [HttpDelete("{ID}")]
+    public ActionResult Delete(int ID)
     {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
+      _repo.RemoveGame(ID);
+
+      return Ok();
     }
 
-    // GET: GamesController/Delete/5
-    public ActionResult Delete(int id)
-    {
-      return View();
-    }
-
-    // POST: GamesController/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
-    {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
-    }
   }
 }

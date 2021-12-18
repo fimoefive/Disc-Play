@@ -28,10 +28,10 @@ namespace Disc_Play.Controllers
     }
 
     // GET: MessagesController/Details/5
-    public ActionResult Details(int ID)
-    {
-      return View();
-    }
+    //public ActionResult Details(int ID)
+    //{
+    //  return View();
+    //}
 
     // GETMessageID: MessagesController/{MessageID}
     [HttpGet("GetMessageByMessageID/{messageID}")]
