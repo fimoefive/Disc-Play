@@ -46,7 +46,7 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
       // sql query string
-      var sql = db.QueryFirstOrDefault<Game>("SELECT * FROM GAME WHERE GameID = @gameID", new { gameID });
+      var sql = db.QueryFirstOrDefault<Game>("SELECT * FROM [GAME] WHERE GameID = @gameID", new { gameID });
       return sql;
     }
 

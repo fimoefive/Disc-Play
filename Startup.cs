@@ -27,8 +27,10 @@ namespace Disc_Play
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddSingleton<IConfiguration>(Configuration);
       services.AddTransient<GameRepository>();
       services.AddTransient<MessageRepository>();
+      services.AddTransient<UserRepository>();
 
       services.AddControllers();
       services.AddSwaggerGen(c =>
