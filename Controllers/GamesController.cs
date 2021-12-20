@@ -28,17 +28,17 @@ namespace Disc_Play.Controllers
     }
 
     // GET: GamesController/Details/5
-    [HttpGet("GetGameByGameID/{gameID}")]
-    public List<Game> GetGameByGameID(string gameID)
-    {
-      return _repo.GetGameByGameID(gameID);
-    }
+    //[HttpGet("GetGameByGameID/{gameID}")]
+    //public List<Game> GetGameByGameID(string gameID)
+    //{
+    //  return _repo.GetGameByGameID(gameID);
+    //}
 
     // GET: GamesController/GameID
     [HttpGet("{gameID}")]
     public IActionResult GETGameByID(int gameID)
     {
-      var game = _repo.GetGameByID(gameID);
+      var game = _repo.GetByGameIDFromDB(gameID);
 
       if (game == null)
       {
@@ -48,11 +48,11 @@ namespace Disc_Play.Controllers
     }
 
     // GET: GamesController/{course}
-    [HttpGet("GetCourseFromList/{course}")]
-    public IEnumerable<Game> GETCourseByList(string course)
-    {
-      return _repo.GetCourseFromList(course);
-    }
+    //[HttpGet("GetCourseFromList/{course}")]
+    //public IEnumerable<Game> GETCourseByList(string course)
+    //{
+    //  return _repo.GetCourseFromList(course);
+    //}
 
     // GET: GamesController/{course}
     [HttpGet("GetCourseFromDB/{course}")]
@@ -80,7 +80,7 @@ namespace Disc_Play.Controllers
     [HttpPut("{ID}")]
     public IActionResult Edit(int ID, Game game)
     {
-      var gameUpdate = _repo.GetByIDFromDB(ID);
+      var gameUpdate = _repo.GetByGameIDFromDB(ID);
 
       if (gameUpdate == null)
       {

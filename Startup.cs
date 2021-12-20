@@ -54,8 +54,9 @@ namespace Disc_Play
       app.UseRouting();
 
       app.UseAuthorization();
+
       // Added Line UseCors
-      //app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+      app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
       app.UseEndpoints(endpoints =>
       {

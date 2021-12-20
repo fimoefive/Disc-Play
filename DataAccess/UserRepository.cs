@@ -12,63 +12,67 @@ namespace Disc_Play.DataAccess
   public class UserRepository
   {
     //  User Static List Method
-    static List<User> _users = new List<User>();
+    //static List<User> _users = new List<User>();
       readonly string _connectionString;
 
       // Connection configuration string in Startup
       public UserRepository(IConfiguration config)
       {
         _connectionString = config.GetConnectionString("DiscPlay");
-        LoadAllUsers();
+        //LoadAllUsers();
       }
 
     // LoadAllUsers from SQL DB.ToList Method
-    internal void LoadAllUsers()
-    {
-      using var db = new SqlConnection(_connectionString);
-      _users = db.Query<User>("SELECT * FROM USER").ToList();
-    }
+    //internal void LoadAllUsers()
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  _users = db.Query<User>("SELECT * FROM USER").ToList();
+    //}
 
     // GetALL Method
     internal List<User> GetAllUsers()
     {
-      return _users;
+      using var db = new SqlConnection(_connectionString);
+
+      var users = db.Query<User>(@"SELECT * FROM [USER]").ToList();
+
+      return users;
     }
 
     // GetByID Method
-    internal IEnumerable<User> GetByID(int userID)
-    {
-      return _users.Where(user => user.UserID == userID);
-    }
+    //internal IEnumerable<User> GetByID(int userID)
+    //{
+    //  return _users.Where(user => user.UserID == userID);
+    //}
 
     // GetUserByUserID Method
-    internal List<User> GetUserByUserID(string userID)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var temp = db.Query<User>("SELECT * FROM USER WHERE UserID = @userID", new { userID }).ToList();
-      return temp;
-    }
+    //internal List<User> GetUserByUserID(string userID)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  var temp = db.Query<User>("SELECT * FROM USER WHERE UserID = @userID", new { userID }).ToList();
+    //  return temp;
+    //}
 
     // GetUserByIDFromDB Method
     internal User GetUserByIDFromDB(int userID)
     {
       using var db = new SqlConnection(_connectionString);
-      var user = db.QueryFirstOrDefault<User>("SELECT * FROM USER WHERE UserID = @userID", new { userID });
+      var user = db.QueryFirstOrDefault<User>("SELECT * FROM [USER] WHERE UserID = @userID", new { userID });
       return user;
     }
 
     // GetUserByNameFromList Method
-    internal IEnumerable<User> GetUserByNameFromList(string firstName)
-    {
-      var tempUser = _users.Where(user => user.FirstName == firstName); //&& user => user.LastName == LastName
-      return tempUser;
-    }
+    //internal IEnumerable<User> GetUserByNameFromList(string firstName)
+    //{
+    //  var tempUser = _users.Where(user => user.FirstName == firstName); //&& user => user.LastName == LastName
+    //  return tempUser;
+    //}
 
     // GetUserByNameFromDB Method
     internal User GetUserByNameFromDB(string firstName)
     {
       using var db = new SqlConnection(_connectionString);
-      var temp = db.QueryFirstOrDefault<User>("SELECT * FROM USER WHERE FirstName = @firstName", new { firstName });
+      var temp = db.QueryFirstOrDefault<User>("SELECT * FROM [USER] WHERE FirstName = @firstName", new { firstName });
       return temp;
     }
 
@@ -86,9 +90,9 @@ namespace Disc_Play.DataAccess
         UserRole = newUser.UserRole,
       };
 
-      var sql = @"INSERT into USER(FirstName,LastName,Email,UID,UserRole)
-                        output INSERTED.UserID
-                        values (@FirstName, @LastName, @Email, @UID, @UserRole)";
+      var sql = @"INSERT into [USER](FirstName,LastName,Email,UID,UserRole)
+                        OUTPUT INSERTED.UserID
+                        VALUES (@FirstName, @LastName, @Email, @UID, @UserRole)";
 
       var ID = db.ExecuteScalar(sql, newUser2);
     }
@@ -98,11 +102,11 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"IF EXISTS(SELECT * 
-                            FROM USER
+                            FROM [USER]
                             WHERE  UserID = @ID
                             )
                    DELETE 
-                   FROM USER 
+                   FROM [USER] 
                    WHERE UserID = @ID";
 
       db.Execute(sql, new { ID });
@@ -113,10 +117,10 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"IF EXISTS(SELECT * 
-                            FROM USER
+                            FROM [USER]
                             WHERE  UserID = @UserID
                             )
-                        UPDATE USER 
+                        UPDATE [USER] 
                         Set FirstName = @FirstName
                            ,LastName = @LastName
 	                       ,Email = @Email
@@ -132,15 +136,15 @@ namespace Disc_Play.DataAccess
     }
 
     //  GetByUserUID Method
-    internal User GetByUserUID(string userUID)
+    internal User GetByUserUID(string uid)
     {
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"SELECT *
-                  FROM USER
-                  WHERE UID = @UID";
+                  FROM [USER]
+                  WHERE UID = @uid";
 
-      var user = db.QueryFirstOrDefault<User>(sql, new { userUID });
+      var user = db.QueryFirstOrDefault<User>(sql, new { uid });
 
       return user;
     }
@@ -150,8 +154,8 @@ namespace Disc_Play.DataAccess
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"IF EXISTS(SELECT *
-                  FROM USER
-                  WHERE UID=@uID) SELECT 1 ELSE SELECT 0";
+                  FROM [USER]
+                  WHERE UID = @uid) SELECT 1 ELSE SELECT 0";
 
       var result = db.QueryFirstOrDefault<bool>(sql, new { uID });
 

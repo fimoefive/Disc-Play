@@ -12,60 +12,64 @@ namespace Disc_Play.DataAccess
   public class MessageRepository
   {
     //  MessageForum Static List Method
-    static List<MessageForum> _messages = new List<MessageForum>();
+    //static List<MessageForum> _messages = new List<MessageForum>();
     readonly string _connectionString;
 
     //  Connection configuration string in Startup
     public MessageRepository(IConfiguration config)
     {
       _connectionString = config.GetConnectionString("DiscPlay");
-      LoadAllMessages();
+      //LoadAllMessages();
     }
 
     //  LoadAllMessages Method
-    internal void LoadAllMessages()
-    {
-      using var db = new SqlConnection(_connectionString);
-      _messages = db.Query<MessageForum>("SELECT * FROM MESSAGE_FORUM").ToList();
-    }
+    //internal void LoadAllMessages()
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  _messages = db.Query<MessageForum>("SELECT * FROM [MESSAGE_FORUM]").ToList();
+    //}
 
     //  GetALL Messages Method
     internal List<MessageForum> GetAllMessages()
     {
-      return _messages;
+      using var db = new SqlConnection(_connectionString);
+
+      var messages = db.Query<MessageForum>(@"SELECT * FROM [MESSAGE_FORUM]").ToList();
+
+      return messages;
     }
 
     //  GetPaymentByID Method
-    internal IEnumerable<MessageForum> GetMessageByID(int messageID)
-    {
-      return _messages.Where(message_forum => message_forum.MessageID == messageID);
-    }
+    //internal IEnumerable<MessageForum> GetMessageByID(int messageID)
+    //{
+    //  return _messages.Where(message_forum => message_forum.MessageID == messageID);
+    //}
 
     //  GetByIDFromDB Method
     internal MessageForum GetByIDFromDB(int messageID)
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = db.QueryFirstOrDefault<MessageForum>("SELECT * FROM MESSAGE_FORUM WHERE MessageID = @messageID", new { messageID });
+      var sql = db.QueryFirstOrDefault<MessageForum>("SELECT * FROM [MESSAGE_FORUM] WHERE MessageID = @messageID", new { messageID });
       return sql;
     }
 
     //  GetMessageByMessageID Method
-    internal List<MessageForum> GetMessageByMessageID(string messageID)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var temp = db.Query<MessageForum>("SELECT * FROM MESSAGE_FORUM WHERE MessageID = @messageID", new { messageID }).ToList();
-      return temp;
-    }
+    //internal List<MessageForum> GetMessageByMessageID(string messageID)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  var temp = db.Query<MessageForum>("SELECT * FROM MESSAGE_FORUM WHERE MessageID = @messageID", new { messageID }).ToList();
+    //  return temp;
+    //}
 
     //  ADD Message Method
     internal void Add(MessageForum newMessage)
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = @"INSERT INTO MESSAGE_FORUM (Message, TimeStamp)
+      var sql = @"INSERT INTO [MESSAGE_FORUM] (UserID, Message, TimeStamp, UID)
                    OUTPUT INSERTED.MessageID
-                   VALUES (@Message, @TimeStamp)";
+                   VALUES (@UserID, @Message, @TimeStamp, @UID)";
 
       var ID = db.ExecuteScalar<int>(sql, newMessage);
       newMessage.MessageID = ID;
@@ -76,11 +80,11 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"IF EXISTS(SELECT * 
-                            FROM MESSAGE_FORUM
+                            FROM [MESSAGE_FORUM]
                             WHERE  MessageID = @ID
                             )
                    DELETE 
-                   FROM MESSAGE_FORUM 
+                   FROM [MESSAGE_FORUM] 
                    WHERE MessageID = @ID";
 
       db.Execute(sql, new { ID });
@@ -91,14 +95,16 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"IF EXISTS(SELECT * 
-                            FROM MESSAGE_FORUM
+                            FROM [MESSAGE_FORUM]
                             WHERE  MessageID = @messageID
                             )
-                   UPDATE MESSAGE_FORUM
-                   SET Message = @Message
-                   ,TimeStame = @TimeStamp
+                   UPDATE [MESSAGE_FORUM]
+                   SET UserID = @UserID
+                   ,Message = @Message
+                   ,TimeStamp = @TimeStamp
+                   ,UID = @UID
                    OUTPUT INSERTED.*
-                   WHERE MessageID = @messageID";
+                   WHERE MessageID = @MessageID";
 
       // message.MessageID = ID;
       var updatedMessage = db.QuerySingleOrDefault<MessageForum>(sql, message);

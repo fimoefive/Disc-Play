@@ -28,11 +28,11 @@ namespace Disc_Play.Controllers
     }
 
     // GET: GETBYUSERID UserController/userID/{id}
-    [HttpGet("GETBYUSERID/{userID}")]
-    public List<User> GETBYUSERID(string userID)
-    {
-      return _repo.GetUserByUserID(userID);
-    }
+    //[HttpGet("GETBYUSERID/{userID}")]
+    //public List<User> GETBYUSERID(string userID)
+    //{
+    //  return _repo.GetUserByUserID(userID);
+    //}
 
     // GET: UserController/{ID}
     [HttpGet("{ID}")]
@@ -48,11 +48,11 @@ namespace Disc_Play.Controllers
     }
 
     //  GET: User/FirstName
-    [HttpGet("CGetUserFirstFromList/{firstName}")]
-    public IEnumerable<User> CGetUserFirstFromList(string firstName)
-    {
-      return _repo.GetUserByNameFromList(firstName);
-    }
+    //[HttpGet("CGetUserFirstFromList/{firstName}")]
+    //public IEnumerable<User> CGetUserFirstFromList(string firstName)
+    //{
+    //  return _repo.GetUserByNameFromList(firstName);
+    //}
 
     [HttpGet("CGetUserByNameFromDB/{firstName}")]
     public User CGetUserByNameFromDB(string firstName)
@@ -99,20 +99,18 @@ namespace Disc_Play.Controllers
       return Ok();
     }
 
+    // GET: GETUserByUID/{UID}
+    [HttpGet("GETUserByUID/{uid}")]
+    public User GETUserByUID(string uid)
+    {
+      return _repo.GetByUserUID(uid);
+    }
+
     // GET: validateUse/{UID}
     [HttpGet("validateUser/{uID}")]
     public bool validateUser(string uID)
     {
       return _repo.IsAUser(uID);
     }
-
-    // GET: GETUserByUID/{UID}
-    [HttpGet("GetUserByUID/{uID}")]
-    public User GETUserByUID(string uID)
-    {
-      return _repo.GetByUserUID(uID);
-    }
-
-
   }
 }

@@ -6,17 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.cs" />
-    <Compile Include="obj\Debug\net5.0\Disc-Play.AssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="obj\Disc-Play.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
     <Content Include="Properties\launchSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -25,18 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="obj\Debug\net5.0\Disc-Play.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net5.0\Disc-Play.assets.cache" />
-    <None Include="obj\Debug\net5.0\Disc-Play.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net5.0\Disc-Play.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Disc-Play.csproj.nuget.g.props" />
-    <None Include="obj\Disc-Play.csproj.nuget.g.targets" />
-    <None Include="obj\project.nuget.cache" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

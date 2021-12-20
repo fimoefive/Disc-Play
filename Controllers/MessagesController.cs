@@ -34,11 +34,11 @@ namespace Disc_Play.Controllers
     //}
 
     // GETMessageID: MessagesController/{MessageID}
-    [HttpGet("GetMessageByMessageID/{messageID}")]
-    public List<MessageForum> GETMessageByMessageID(string messageID)
-    {
-      return _repo.GetMessageByMessageID(messageID);
-    }
+    //[HttpGet("GetMessageByMessageID/{messageID}")]
+    //public List<MessageForum> GETMessageByMessageID(string messageID)
+    //{
+    //  return _repo.GetMessageByMessageID(messageID);
+    //}
 
     // GET: MessageID IACTION
     [HttpGet("{messageID}")]
@@ -48,7 +48,7 @@ namespace Disc_Play.Controllers
 
       if (message == null)
       {
-        return NotFound($"No payment with ID of {messageID} was found.");
+        return NotFound($"No message with ID of {messageID} was found.");
       }
       return Ok(message);
     }
