@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Disc_Play.DataAccess;
+using Disc_Play.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,81 +9,108 @@ using System.Threading.Tasks;
 
 namespace Disc_Play.Controllers
 {
-  public class UserController : Controller
+  [Route("api/user")]
+  [ApiController]
+  public class UserController : Controller  // ControllerBase
   {
-    // GET: UserController
-    public ActionResult Index()
+    UserRepository _repo;
+
+    public UserController(UserRepository repo)
     {
-      return View();
+      _repo = repo;
     }
 
-    // GET: UserController/Details/5
-    public ActionResult Details(int id)
+    // GET: GETALLUSERS UserController
+    [HttpGet]
+    public List<User> GETALLUSERS()
     {
-      return View();
+      return _repo.GetAllUsers();
     }
 
-    // GET: UserController/Create
-    public ActionResult Create()
+    // GET: GETBYUSERID UserController/userID/{id}
+    //[HttpGet("GETBYUSERID/{userID}")]
+    //public List<User> GETBYUSERID(string userID)
+    //{
+    //  return _repo.GetUserByUserID(userID);
+    //}
+
+    // GET: UserController/{ID}
+    [HttpGet("{ID}")]
+    public IActionResult GETUSERBYID(int ID)
     {
-      return View();
+      var user = _repo.GetUserByIDFromDB(ID);
+
+      if (user == null)
+      {
+        return NotFound($"No user with the ID of {ID} was found");
+      }
+      return Ok(user);
     }
 
-    // POST: UserController/Create
+    //  GET: User/FirstName
+    //[HttpGet("CGetUserFirstFromList/{firstName}")]
+    //public IEnumerable<User> CGetUserFirstFromList(string firstName)
+    //{
+    //  return _repo.GetUserByNameFromList(firstName);
+    //}
+
+    [HttpGet("CGetUserByNameFromDB/{firstName}")]
+    public User CGetUserByNameFromDB(string firstName)
+    {
+      return _repo.GetUserByNameFromDB(firstName);
+    }
+
+    // POST: UserController/AddUser
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public IActionResult AddUser(User newUser)
     {
-      try
+      if (string.IsNullOrEmpty(newUser.FirstName) ||
+         string.IsNullOrEmpty(newUser.LastName) ||
+         string.IsNullOrEmpty(newUser.Email))
       {
-        return RedirectToAction(nameof(Index));
+        return BadRequest("User information fields and Payment ID are required");
       }
-      catch
-      {
-        return View();
-      }
+      _repo.Add(newUser);
+
+        return Created($"api/user/{newUser.UserID}", newUser);
     }
 
-    // GET: UserController/Edit/5
-    public ActionResult Edit(int id)
+    // GET: UserController/Edit/{ID}
+    [HttpPut("{ID}")]
+    public IActionResult Edit(int ID, User user)
     {
-      return View();
+      var userToUpdate = _repo.GetUserByIDFromDB(ID);
+
+      if (userToUpdate == null)
+      {
+        return NotFound($"Could not find user with that ID of {ID} for updating.");
+      }
+
+      var updateUser = _repo.UpdateUser(ID, user);
+      return Ok(updateUser);
     }
 
-    // POST: UserController/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
+    // DELETE: UserController/Delete/{ID}
+    [HttpDelete("{ID}")]
+    public IActionResult Delete(int ID)
     {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
+      _repo.RemoveUser(ID);
+
+      return Ok();
     }
 
-    // GET: UserController/Delete/5
-    public ActionResult Delete(int id)
+    // GET: GETUserByUID/{UID}
+    [HttpGet("GETUserByUID/{uid}")]
+    public User GETUserByUID(string uid)
     {
-      return View();
+      return _repo.GetByUserUID(uid);
     }
 
-    // POST: UserController/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
+    // GET: validateUse/{UID}
+    [HttpGet("validateUser/{uID}")]
+    public bool validateUser(string uID)
     {
-      try
-      {
-        return RedirectToAction(nameof(Index));
-      }
-      catch
-      {
-        return View();
-      }
+      return _repo.IsAUser(uID);
     }
   }
 }
