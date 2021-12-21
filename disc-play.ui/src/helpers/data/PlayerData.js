@@ -15,13 +15,13 @@ const getUserWithUID = (UID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addUserToDB = (object) => new Promise((resolve, reject) => {
+const addPlayer = (object) => new Promise((resolve, reject) => {
   axios.post(`${dbURL}/api/user`, object)
     .then((response) => resolve(response))
     .catch((error) => reject(error));
 });
 
-const updateUser = (userObject) => new Promise((resolve, reject) => {
+const updatePlayer = (userObject) => new Promise((resolve, reject) => {
   axios.put(`${dbURL}/api/user/${userObject.userID}`, userObject)
     .then(() => {
       getUserWithUID(userObject.userID).then((resolve));
@@ -29,5 +29,6 @@ const updateUser = (userObject) => new Promise((resolve, reject) => {
 });
 
 export {
-  getValidUser, getUserWithUID, addUserToDB, updateUser
+    getValidUser, getUserWithUID,
+    addPlayer, updatePlayer
 };

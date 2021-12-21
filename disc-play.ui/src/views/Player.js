@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ProfileCard from '../components/ProfileCard';
+import PlayerCard from '../components/PlayerCard';
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -13,21 +13,21 @@ const ProfileContainer = styled.div`
   z-index: -1;
   `;
 
-function ProfileView({ user }) {
+function Player({ user }) {
   return (
     <div>
       <h2>Player Profile</h2>
       <ProfileContainer>
       {
-        <ProfileCard user={user} />
+        <PlayerCard user={user} />
       }
       </ProfileContainer>
     </div>
   );
 }
 
-ProfileView.propTypes = {
+Player.propTypes = {
   user: PropTypes.any
 };
 
-export default ProfileView;
+export default Player;

@@ -5,15 +5,14 @@ import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
 import { getGames } from '../helpers/data/gameData';
 import { getMessages } from '../helpers/data/MessageForumData'
-import { getValidUser, getUserWithUID } from '../helpers/data/usersData';
+import { getValidUser, getUserWithUID } from '../helpers/data/PlayerData';
 
 import '../styles/App.css';
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [loggedInUser, setLoggedUser] = useState({});
-  // const [userFromDB, setUserFromDB] = useState(null);
-  // const [registeredUser, setRegisteredUser] = useState(false);
+  const [userDB, setUserDB] = useState(null);
+  const [registeredUser, setRegisteredUser] = useState(false);
   const [games, setGames] = useState([]);
   const [messages, setMessages] = useState([]);
 
@@ -26,11 +25,15 @@ function App() {
           uid: authed.uid,
           user: authed.email.split('@')[0]
         };
+        getUserWithUID(authed.uid).then((resp) => setUserDB(resp));
+        getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
         getGames().then((gamesArray) => setGames(gamesArray));
         getMessages().then((messageArray) => setMessages(messageArray));
         setUser(userInfoObj);
       } else if (user || user === null) {
         setUser(false);
+        setRegisteredUser(false);
+        setUserDB(false);
       }
     });
   }, []);
@@ -39,10 +42,18 @@ function App() {
     <div className="App">
   <Router>
         <NavBar
-        user={user}
+          user={user}
+          registeredUser={registeredUser}
         />
         <Routes
-        user={user}
+          user={user}
+          userDB={userDB}
+          registeredUser={registeredUser}
+          setUserDB={setUser}
+          games={games}
+          setGames={setGames}
+          messages={messages}
+          setMessages={setMessages}
         />
       </Router>
     </div>

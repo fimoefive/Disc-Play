@@ -4,6 +4,7 @@ import {
   Card, CardText, CardBody, CardSubtitle, Button
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../helpers/auth';
+import PlayerForm from '../forms/PlayerForm';
 
 function Home({
     user,
@@ -31,13 +32,6 @@ function Home({
     );
   
     // const [currentImage, setCurrentImage] = useState(null);
-  
-    // useEffect(() => {
-    //   const intervalId = setInterval(() => {
-    //     setCurrentImage(images[Math.floor(Math.random() * images.length)]);
-    //   }, 3500);
-    //   return () => clearInterval(intervalId);
-    // }, []);
   
     return (
       <div>
