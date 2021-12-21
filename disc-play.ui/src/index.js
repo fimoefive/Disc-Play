@@ -1,13 +1,18 @@
+import firebase from 'firebase/app';
+// import firebase from 'firebase';
+import 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
+import firebaseConfig from './helpers/apiKeys';
 import App from './App/App.js';
 import reportWebVitals from './reportWebVitals';
 
+import './styles/index.css';
+
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
