@@ -11,7 +11,7 @@ const getMessages = () => new Promise((resolve, reject) => {
 });
 
 const getMessageByID = (messageID) => new Promise((resolve, reject) => {
-    axios.get(`${dbURL}/api/message_forum/${messageID}`)
+    axios.get(`${dbUrl}/api/message_forum/${messageID}`)
       .then((response) => resolve(response.data))
       .catch((error) => reject(error));
   });
@@ -19,9 +19,9 @@ const getMessageByID = (messageID) => new Promise((resolve, reject) => {
 const addMessage = (messageObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/api/message_forum`, messageObj)
     .then((response) => {
-      axios.patch(`${dbUrl}/messages/${response.data.name}.json`, body)
+      axios.patch(`${dbUrl}/messages/${response.data.name}.json`, messageObj)
         .then(() => {
-          getMessages(uid).then((messageArray) => resolve(messageArray));
+          getMessages().then((messageArray) => resolve(messageArray));
         });
     }).catch((error) => reject(error));
 });

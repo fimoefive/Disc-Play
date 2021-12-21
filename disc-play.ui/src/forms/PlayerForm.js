@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
-// import { addUserToDB, updateUser } from '../helpers/data/usersData';
+import { addPlayer, updatePlayer } from '../helpers/data/PlayerData';
 
 function PlayerForm({
   userID,
@@ -11,9 +11,9 @@ function PlayerForm({
   email,
   uid,
   userRole,
-  setUserFromDB
+  setUserDB
 }) {
-    const [newUser, setNewUser] = useState({
+    const [newPlayer, setNewPlayer] = useState({
     userID: userID || null,
     firstName: firstName || '',
     lastName: lastName || '',
@@ -25,26 +25,19 @@ function PlayerForm({
   const history = useHistory();
 
   const handleInputChange = (e) => {
-    setNewUser((prevState) => ({
+    setNewPlayer((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
     }));
   };
 
-//   const handleNumberInput = (e) => {
-//     setNewUser((prevState) => ({
-//       ...prevState,
-//       [e.target.name]: e.target.valueAsNumber
-//     }));
-//   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newUser.userUID) {
-      updateUser(newUser).then((userArray) => setUserFromDB(userArray));
+    if (newPlayer.uid) {
+      updatePlayer(newPlayer).then((userArray) => setUserDB(userArray));
       history.push('/profile');
     } else {
-      addUserToDB(newUser);
+      addPlayer(newPlayer);
     }
   };
 
@@ -58,7 +51,7 @@ function PlayerForm({
         name='firstName'
         type='text'
         placeholder='First Name'
-        value={newUser.firstName}
+        value={newPlayer.firstName}
         onChange={handleInputChange}
         required />
         <br/>
@@ -68,7 +61,7 @@ function PlayerForm({
         name='lastName'
         type='text'
         placeholder='Last Name'
-        value={newUser.lastName}
+        value={newPlayer.lastName}
         onChange={handleInputChange}
         required />
         <br/>
@@ -78,20 +71,20 @@ function PlayerForm({
         name='email'
         type='text'
         placeholder='Email Address'
-        value={newUser.email}
+        value={newPlayer.email}
         onChange={handleInputChange}
         required
         />
-        <br/>
+        {/* <br/>
         <label>Role:</label>
         <input
         className='ml-2'
         name='userRole'
         type='text'
         placeholder='Role'
-        value={newUser.userRole}
+        value={newPlayer.userRole}
         onChange={handleInputChange}
-        required />
+        required /> */}
         <br/>
         <Button color='success' type='submit'>Submit</Button>
       </form>
@@ -106,7 +99,7 @@ PlayerForm.propTypes = {
   email: PropTypes.string,
   uid: PropTypes.any,
   userRole: PropTypes.any,
-  setUserFromDB: PropTypes.any
+  setUserDB: PropTypes.any
 };
 
 export default PlayerForm;

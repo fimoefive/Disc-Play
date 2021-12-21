@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
-// import { getGames } from '../helpers/data/GameData';
 import GameCard from '../components/GameCard';
 import GameForm from '../forms/GameForm';
 
@@ -11,7 +10,6 @@ function Games({
   setGames
 }) {
   const [showAddGame, setAddGame] = useState(false);
-  // const [holes, setHoles] = useState([]);
 
   const handleClick = () => {
     setAddGame((prevState) => !prevState);
@@ -94,6 +92,15 @@ function avg(holeInfo) {
             hole7={holeInfo.hole7}
             hole8={holeInfo.hole8}
             hole9={holeInfo.hole9}
+            hole10={holeInfo.hole10}
+            hole11={holeInfo.hole11}
+            hole12={holeInfo.hole12}
+            hole13={holeInfo.hole13}
+            hole14={holeInfo.hole14}
+            hole15={holeInfo.hole15}
+            hole16={holeInfo.hole16}
+            hole17={holeInfo.hole17}
+            hole18={holeInfo.hole18}
             total={total(holeInfo)}
             avg={avg(holeInfo)}
             // TimeStamp={TimeStamp}
