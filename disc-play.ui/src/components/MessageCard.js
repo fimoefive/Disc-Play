@@ -8,7 +8,6 @@ import {
 } from 'reactstrap';
 import { getMessages, deleteMessage } from '../helpers/data/MessageForumData';
 import MessageForm from '../forms/MessageForm';
-// import { getUsers } from '../helpers/data/userData';
 // import '../styles/messageForum.scss';
 
 const MessageCard = ({
@@ -22,7 +21,6 @@ const MessageCard = ({
     // userDB
 }) => {
   const [editing, setEditing] = useState(false);
-  // const [username, setUsername] = useState({});
 
   const handleClick = (type) => {
     switch (type) {

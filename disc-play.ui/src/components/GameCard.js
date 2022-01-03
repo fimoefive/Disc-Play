@@ -52,7 +52,7 @@ const handleClick = (type) => {
             setEditing((prevState) => !prevState);
             break;
         case 'view':
-            history.push(`/games/${userID}`);
+            history.push(`/games/${gameID}`);
             break;
         default:
             console.warn('nothing selected');

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import Player from '../views/Player';
 import Games from '../views/Games';
+import SingleGameCard from '../components/SingleGameCard';
 import MessageForum from '../views/MessageForum';
 
 
@@ -63,6 +64,15 @@ function Routes({
             user={user}
             games={games}
             setGames={setGames}
+            userDB={userDB}
+          />}
+          />
+        <PrivateRoute
+          user={user}
+          registeredUser={registeredUser}
+          path='/games/:gameID'
+          component={() => <SingleGameCard
+            user={user}
             userDB={userDB}
           />}
           />

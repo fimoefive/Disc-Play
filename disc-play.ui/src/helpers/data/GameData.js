@@ -34,8 +34,14 @@ const updateGame = (gameObj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSingleGame = (gameID) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/game/${gameID}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 export {
-    getGames, getGameByID,
-    addGame,
+  getGames, getGameByID,
+  getSingleGame, addGame,
   deleteGame, updateGame
 };
