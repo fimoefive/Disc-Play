@@ -42,7 +42,7 @@ const NavBar = ({ user, registeredUser }) => {
                     <Nav className="mr-auto" navbar>
                         
             <NavItem>
-              <Link className="nav-link" to="/"><Home /> Home</Link>
+              <Link className="nav-link" to="/">Home</Link>
             </NavItem>
                         
             { (user && registeredUser) && authenticated() }
@@ -56,9 +56,9 @@ const NavBar = ({ user, registeredUser }) => {
                   }
                 </NavItem>
               }
-              {/* <NavItem>
-                <Link className="nav-link" to="/profile"><ImUserTie /> Profile</Link>
-              </NavItem> */}
+              <NavItem>
+                <Link className="nav-link" to="/profile">Profile</Link>
+              </NavItem>
 
             </Nav>
             </Collapse>

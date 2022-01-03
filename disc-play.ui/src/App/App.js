@@ -3,8 +3,8 @@ import firebase from 'firebase';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
-import { getGames } from '../helpers/data/gameData';
-import { getMessages } from '../helpers/data/MessageForumData'
+import { getGames } from '../helpers/data/GameData';
+// import { getMessages } from '../helpers/data/MessageForumData'
 import { getValidUser, getUserWithUID } from '../helpers/data/PlayerData';
 
 import '../styles/App.css';
@@ -14,7 +14,7 @@ function App() {
   const [userDB, setUserDB] = useState(null);
   const [registeredUser, setRegisteredUser] = useState(false);
   const [games, setGames] = useState([]);
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -28,7 +28,7 @@ function App() {
         getUserWithUID(authed.uid).then((resp) => setUserDB(resp));
         getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
         getGames().then((gamesArray) => setGames(gamesArray));
-        getMessages().then((messageArray) => setMessages(messageArray));
+        // getMessages().then((messageArray) => setMessages(messageArray));
         setUser(userInfoObj);
       } else if (user || user === null) {
         setUser(false);
@@ -52,8 +52,8 @@ function App() {
           setUserDB={setUser}
           games={games}
           setGames={setGames}
-          messages={messages}
-          setMessages={setMessages}
+          // messages={messages}
+          // setMessages={setMessages}
         />
       </Router>
     </div>

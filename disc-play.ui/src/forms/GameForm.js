@@ -4,7 +4,7 @@ import {
     Button, Form,
     FormGroup, Label, Input
 } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory} from 'react-router-dom'
 import { addGame, updateGame } from '../helpers/data/GameData';
 
 const GameForm = ({

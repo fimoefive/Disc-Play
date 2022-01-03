@@ -61,7 +61,17 @@ function Routes({
             games={games}
             setGames={setGames}
           />}
-        />
+          />
+        {/* <PrivateRoute
+            user={user}
+            registeredUser={registeredUser}
+            path='/message_forum'
+            component={() => <Player
+            user={user}
+            setUserDB={setUserDB}
+            userDB={userDB}
+            />}
+        /> */}
     </Switch>
     </>
     );
@@ -70,8 +80,8 @@ function Routes({
 Routes.propTypes = {
     user: PropTypes.any,
     registeredUser: PropTypes.bool.isRequired,
-    userFromDB: PropTypes.any,
-    setUserFromDB: PropTypes.any.isRequired,
+    userDB: PropTypes.any,
+    setUserDB: PropTypes.any.isRequired,
     games: PropTypes.array.isRequired,
     setGames: PropTypes.func.isRequired
 };

@@ -7,7 +7,7 @@ import {
     CardText,
     CardTitle,
 } from 'reactstrap';
-import { deleteGame } from '../helpers/data/gameData';
+import { deleteGame } from '../helpers/data/GameData';
 import GameForm from '../forms/GameForm';
 
 const GameCard = ({
