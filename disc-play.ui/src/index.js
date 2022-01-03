@@ -1,6 +1,6 @@
 // import firebase from 'firebase/app';
 import firebase from 'firebase';
-// import 'firebase/auth';
+import 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebaseConfig from './helpers/apiKeys';

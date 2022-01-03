@@ -3,18 +3,36 @@ import firebase from 'firebase';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
+import { getUser, getValidUser, getUserWithUID, addPlayer } from '../helpers/data/PlayerData';
 import { getGames } from '../helpers/data/GameData';
-// import { getMessages } from '../helpers/data/MessageForumData'
-import { getValidUser, getUserWithUID } from '../helpers/data/PlayerData';
-
+import { getMessages } from '../helpers/data/MessageForumData'
 import '../styles/App.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [userDB, setUserDB] = useState(null);
   const [registeredUser, setRegisteredUser] = useState(false);
+  const [loggedInUser, setLoggedUser] = useState({});
   const [games, setGames] = useState([]);
-  // const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
+
+  const checkUser = (newUser, authed) => {
+    const checkStatus = Object.values(newUser);
+    if (checkStatus.length >= 1) {
+      const userArray = Object.values(newUser);
+      setLoggedUser(userArray[0]);
+    } else {
+      const newUserInfoObj = {
+        fullName: authed.displayName,
+        profileImage: authed.photoURL,
+        role: 'PLAYER',
+        uid: authed.uid,
+      };
+      addPlayer(newUserInfoObj).then((userResponse) => setLoggedUser(userResponse));
+    }
+  };
+
+  const getLoggedInUser = () => firebase.auth().currentUser?.uid;
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -27,8 +45,20 @@ function App() {
         };
         getUserWithUID(authed.uid).then((resp) => setUserDB(resp));
         getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
+
+        // CheckUser function
+        getUserWithUID(authed.uid).then((singleUser) => checkUser(singleUser, authed));
+        getUserWithUID(userInfoObj).then((response) => {
+          // getUserUid(authed.uid).then((response) => {
+          if (Object.values(response.data).length === 0) {
+            addPlayer(userInfoObj).then((resp) => setUser(resp));
+            getLoggedInUser(userInfoObj);
+            getUser(userInfoObj);
+          }
+        });
+
         getGames().then((gamesArray) => setGames(gamesArray));
-        // getMessages().then((messageArray) => setMessages(messageArray));
+        getMessages().then((messageArray) => setMessages(messageArray));
         setUser(userInfoObj);
       } else if (user || user === null) {
         setUser(false);
@@ -36,7 +66,7 @@ function App() {
         setUserDB(false);
       }
     });
-  }, []);
+  }, [user]); // user dependency error
 
   return (
     <div className="App">
@@ -47,13 +77,14 @@ function App() {
         />
         <Routes
           user={user}
-          userDB={userDB}
           registeredUser={registeredUser}
+          userDB={userDB}
           setUserDB={setUser}
+          loggedInUser={loggedInUser}
           games={games}
           setGames={setGames}
-          // messages={messages}
-          // setMessages={setMessages}
+          messages={messages}
+          setMessages={setMessages}
         />
       </Router>
     </div>

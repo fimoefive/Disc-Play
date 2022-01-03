@@ -12,21 +12,21 @@ function Home({
   }) {
     const isNotRegistered = () => (
       <>
-        <h4>Register before continuing</h4>
+        <h4>Register to Play</h4>
         <PlayerForm />
       </>
     );
   
     const authenticated = () => (
       <>
-      <CardText>Get started by browsing our items.</CardText>
+      <CardText>Ready To Play!</CardText>
       <Button color='danger' onClick={signOutUser}>Sign Out</Button>
       </>
     );
   
     const notAuthenticated = () => (
       <>
-        <CardText>Sign in to play</CardText>
+        <CardText>Sign in to start</CardText>
         <Button color='info' onClick={signInUser}>Sign In</Button>
       </>
     );
@@ -44,7 +44,6 @@ function Home({
             { (user && registeredUser) && isNotRegistered() }
           </CardBody>
         </Card>
-        {/* <div className="home-page"><img src={[currentImage]}></img></div> */}
       </div>
     );
   }

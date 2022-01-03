@@ -116,9 +116,9 @@ const handleSubmit = (e) => {
 
     return (
     <>
-    <div className='hole-form'>
+    <div className='game-form'>
     <Form
-        id='addHoleForm'
+        id='addGameForm'
         autoComplete='off'
         onSubmit={handleSubmit}
     >
@@ -367,7 +367,7 @@ GameForm.propTypes = {
     TimeStamp: PropTypes.any,
     setTotal: PropTypes.func,
     uid: PropTypes.string,
-    setHoles: PropTypes.func
+    setGames: PropTypes.func
 };
 
 export default GameForm;

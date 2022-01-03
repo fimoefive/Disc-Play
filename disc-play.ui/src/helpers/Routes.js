@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import Player from '../views/Player';
 import Games from '../views/Games';
+import MessageForum from '../views/MessageForum';
 
 
 const PrivateRoute = ({
@@ -31,7 +32,10 @@ function Routes({
     userDB,
     setUserDB,
     games,
-    setGames
+    setGames,
+    messages,
+    setMessages
+    
 }) {
     return (
     <>
@@ -54,24 +58,24 @@ function Routes({
         <PrivateRoute
           user={user}
           registeredUser={registeredUser}
-          userDB={userDB}
           path='/games'
           component={() => <Games
             user={user}
             games={games}
             setGames={setGames}
+            userDB={userDB}
           />}
           />
-        {/* <PrivateRoute
+        <PrivateRoute
             user={user}
             registeredUser={registeredUser}
             path='/message_forum'
-            component={() => <Player
+            component={() => <MessageForum
             user={user}
             setUserDB={setUserDB}
             userDB={userDB}
             />}
-        /> */}
+        />
     </Switch>
     </>
     );
@@ -83,7 +87,9 @@ Routes.propTypes = {
     userDB: PropTypes.any,
     setUserDB: PropTypes.any.isRequired,
     games: PropTypes.array.isRequired,
-    setGames: PropTypes.func.isRequired
+    setGames: PropTypes.func.isRequired,
+    messages: PropTypes.array.isRequired,
+    setMessages: PropTypes.func.isRequired
 };
 
 export default Routes;
