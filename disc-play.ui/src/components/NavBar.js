@@ -56,9 +56,9 @@ const NavBar = ({ user, registeredUser }) => {
                   }
                 </NavItem>
               }
-              <NavItem>
+              {/* <NavItem>
                 <Link className="nav-link" to="/profile">Profile</Link>
-              </NavItem>
+              </NavItem> */}
 
             </Nav>
             </Collapse>

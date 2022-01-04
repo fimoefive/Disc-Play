@@ -80,6 +80,7 @@ function avg(holeInfo) {
         </div>
         {games.map((holeInfo) => (
           <GameCard className="gameCard"
+            user={user}
             key={holeInfo.gameID}
             gameID={holeInfo.gameID}
             course={holeInfo.course}
@@ -104,7 +105,6 @@ function avg(holeInfo) {
             total={total(holeInfo)}
             avg={avg(holeInfo)}
             // TimeStamp={TimeStamp}
-            user={user}
             setGames={setGames}
           />
         ))}

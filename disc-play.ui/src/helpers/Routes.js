@@ -31,12 +31,11 @@ function Routes({
     user,
     registeredUser,
     userDB,
-    setUserDB,
     games,
     setGames,
     messages,
-    setMessages
-    
+    setMessages,
+    setUserDB
 }) {
     return (
     <>
@@ -82,7 +81,8 @@ function Routes({
             path='/message_forum'
             component={() => <MessageForum
             user={user}
-            setUserDB={setUserDB}
+            messages={messages}
+            setMessages={setMessages}
             userDB={userDB}
             />}
         />
