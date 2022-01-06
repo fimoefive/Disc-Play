@@ -3,20 +3,14 @@ import firebaseConfig from '../apiKeys';
 
 const dbURL = firebaseConfig.databaseURL;
 
-const getUser = () => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/api/user`)
+const getValidUser = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/api/user/validateUser/${uid}`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
 
-const getValidUser = (UID) => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/api/user/validateUser/${UID}`)
-    .then((response) => resolve(response.data))
-    .catch((error) => reject(error));
-});
-
-const getUserWithUID = (UID) => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/api/user/getUserByUserUID/${UID}`)
+const getUserWithUID = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/api/user/GETUserByUID/${uid}`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
@@ -35,6 +29,6 @@ const updatePlayer = (userObject) => new Promise((resolve, reject) => {
 });
 
 export {
-    getUser, getValidUser, getUserWithUID,
-    addPlayer, updatePlayer
+  getValidUser, getUserWithUID,
+  addPlayer, updatePlayer
 };

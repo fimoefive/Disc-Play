@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
 import { getValidUser, getUserWithUID, } from '../helpers/data/PlayerData';
-// import { getUser, addPlayer } from '../helpers/data/PlayerData';
 import { getGames } from '../helpers/data/GameData';
 import { getMessages } from '../helpers/data/MessageForumData'
 import '../styles/App.css';
@@ -12,8 +11,7 @@ import '../styles/App.css';
 function App() {
   const [user, setUser] = useState(null);
   const [userDB, setUserDB] = useState(null);
-  const [registeredUser, setRegisteredUser] = useState(false);
-  // const [loggedInUser, setLoggedUser] = useState({});
+  const [registeredUser, setRegisteredUser] = useState(false); // null?
   const [games, setGames] = useState([]);
   const [messages, setMessages] = useState([]);
 
@@ -34,6 +32,7 @@ function App() {
   // };
 
   // const getLoggedInUser = () => firebase.auth().currentUser?.uid;
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
@@ -41,24 +40,19 @@ function App() {
           fullName: authed.displayName,
           email: authed.email,
           uid: authed.uid,
-          // user: authed.email.split('@')[0]
+          user: authed.email.split('@')[0]
         };
         getUserWithUID(authed.uid).then((resp) => setUserDB(resp));
-        getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
-
-        // CheckUser Function *****************
-        // getUserWithUID(authed.uid).then((singleUser) => checkUser(singleUser, authed));
-        // getUserWithUID(userInfoObj).then((response) => {
-        //   // getUserUid(authed.uid).then((response) => {
-        //   if (Object.values(response.data).length === 0) {
-        //     addPlayer(userInfoObj).then((resp) => setUser(resp));
-        //     // getLoggedInUser(userInfoObj);
-        //     getUser(userInfoObj);
-        //   }
-        // });
+        getValidUser(authed.uid).then((validResp) => {
+          console.log("Valid Response", validResp);
+          setRegisteredUser(validResp);
+        });
+        // getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
 
         getGames().then((gamesArray) => setGames(gamesArray));
         getMessages().then((messageArray) => setMessages(messageArray));
+        //store the token for later   
+        // user.getIdToken().then((token) => sessionStorage.setItem("token", token));
         setUser(userInfoObj);
       } else if (user || user === null) {
         setUser(false);
@@ -66,12 +60,12 @@ function App() {
         setUserDB(false);
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // user dependency error
 
   return (
     <div className="App">
-  <Router>
+      <Router>
         <NavBar
           user={user}
           registeredUser={registeredUser}
@@ -80,7 +74,6 @@ function App() {
           user={user}
           registeredUser={registeredUser}
           userDB={userDB}
-          // loggedInUser={loggedInUser}
           games={games}
           setGames={setGames}
           messages={messages}

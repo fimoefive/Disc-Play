@@ -149,6 +149,7 @@ namespace Disc_Play.DataAccess
       return user;
     }
 
+    // Get User Bool if Registarted
     internal bool IsAUser(string uID)
     {
       using var db = new SqlConnection(_connectionString);

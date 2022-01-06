@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import {
   Card, CardText, CardBody, CardTitle, Button
 } from 'reactstrap';
@@ -12,7 +11,6 @@ function PlayerCard({
   setUserDB
 }) {
   const [editing, setEditing] = useState(false);
-//   const history = useHistory();
 
 const handleClick = (type) => {
   switch (type) {
@@ -37,7 +35,7 @@ return (
           color="info"
           onClick={() => handleClick('edit')}
           size="sm">
-          {editing ? 'Close Form' : 'Edit User' }
+          {editing ? 'Close Form' : 'Edit Player' }
         </Button>
           {editing && <PlayerForm
                         user={user}
@@ -56,7 +54,6 @@ return (
 
 PlayerCard.propTypes = {
   user: PropTypes.any,
-  // userID: PropTypes.any.isRequired,
   userDB: PropTypes.any.isRequired,
   setUserDB: PropTypes.any
 };
