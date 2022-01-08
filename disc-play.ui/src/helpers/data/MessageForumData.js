@@ -15,7 +15,8 @@ const getMessageByID = (messageID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addMessage = (messageObj) => new Promise((resolve, reject) => {
+const addMessage = (messageObj, userID) => new Promise((resolve, reject) => {
+  messageObj.userId = userID;
   axios.post(`${dbUrl}/api/message_forum`, messageObj)
     .then(() => getMessages().then((messageArray) => resolve(messageArray)))
     .catch((error) => reject(error));

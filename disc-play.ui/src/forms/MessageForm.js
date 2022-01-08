@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { addMessage, updateMessage } from '../helpers/data/MessageForumData';
 
 function MessageForm({
-  formTitle, user, messageID, userID, message, setMessages, timeStamp, uid
+  formTitle, user, userDB, messageID, userID, message, setMessages, timeStamp, uid
 }) {
   const [newMessage, setNewMessage] = useState({
     messageID: messageID || 0,
@@ -26,11 +26,14 @@ function MessageForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    debugger;
     if (newMessage.messageID) {
       updateMessage(newMessage).then(setMessages);
     } else {
-      addMessage(newMessage).then((messageArray) => setMessages(messageArray));
-      history.push('/messages');
+      addMessage(newMessage, userDB.userID).then((response) => {
+        setMessages(response);
+        history.push('/messages');
+      });
     }
   };
 
@@ -55,7 +58,7 @@ function MessageForm({
 MessageForm.propTypes = {
   formTitle: PropTypes.string.isRequired,
   user: PropTypes.any,
-  // userDB: PropTypes.any,
+  userDB: PropTypes.any,
   messageID: PropTypes.any,
   userID: PropTypes.any,
   message: PropTypes.string,

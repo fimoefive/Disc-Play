@@ -28,6 +28,7 @@ function Home({
     <>
       <CardText>Sign in to start</CardText>
       <Button color='info' onClick={signInUser}>Sign In</Button>
+      <PlayerForm />
     </>
   );
 

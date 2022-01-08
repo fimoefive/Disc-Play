@@ -23,6 +23,7 @@ const getGamesByUserID = (userID) => new Promise((resolve, reject) => {
 });
 
 const addGame = (gameObj, userID) => new Promise((resolve, reject) => {
+  gameObj.userId = userID;
   axios.post(`${dbUrl}/api/games`, gameObj)
     .then(() => getGamesByUserID(userID).then((gameArray) => resolve(gameArray)))
     .catch((error) => reject(error));

@@ -80,6 +80,7 @@ const GameForm = ({
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // debugger;
         if (game.gameID) {
             updateGame(game, userDB.userID).then((gameArray) => {
                 // con[sole.log("updateGame", gameArray);
