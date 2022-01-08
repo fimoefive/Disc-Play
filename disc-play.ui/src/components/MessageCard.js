@@ -11,14 +11,14 @@ import MessageForm from '../forms/MessageForm';
 // import '../styles/messageForum.scss';
 
 const MessageCard = ({
-    user,
-    messageID,
-    userID,
-    message,
-    timeStamp,
-    uid,
-    setMessages,
-    // userDB
+  user,
+  messageID,
+  userID,
+  message,
+  timeStamp,
+  uid,
+  setMessages,
+  // userDB
 }) => {
   const [editing, setEditing] = useState(false);
 
@@ -39,7 +39,7 @@ const MessageCard = ({
     }
   };
 
-  const timestamp = new Date().toISOString().slice(0, 10);
+  // const timestamp = new Date().toISOString().slice(0, 10);
   // const timeValue = timestamp.valueOf();
 
   return (
@@ -47,7 +47,7 @@ const MessageCard = ({
       <div className="messageCard">
         <CardBody body="true" className="card text-center">
           <CardTitle tag="h5" type="text">{message}</CardTitle>
-          <CardText type="number">Date: {timestamp}</CardText>
+          <CardText type="number">Date: {timeStamp}</CardText>
           <CardText type="text">Player: {user.firstName}</CardText>
           {user
             ? <Button color='info' user={user} onClick={() => handleClick('edit')}>

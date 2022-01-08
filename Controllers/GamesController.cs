@@ -47,12 +47,18 @@ namespace Disc_Play.Controllers
       return Ok(game);
     }
 
-    // GET: GamesController/{course}
-    //[HttpGet("GetCourseFromList/{course}")]
-    //public IEnumerable<Game> GETCourseByList(string course)
-    //{
-    //  return _repo.GetCourseFromList(course);
-    //}
+    // GET: GamesController/{userID}
+    [HttpGet("GetGamesByUserID/{userID}")]
+    public IActionResult GetGamesByUserID(int userID)
+    {
+      var games = _repo.GetGamesByUserID(userID);
+
+      if (games == null)
+      {
+        return NotFound($"No games for UserID {userID} were found.");
+      }
+      return Ok(games);
+    }
 
     // GET: GamesController/{course}
     [HttpGet("GetCourseFromDB/{course}")]

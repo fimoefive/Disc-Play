@@ -56,21 +56,21 @@ function Routes({
         <PrivateRoute
           user={user}
           registeredUser={registeredUser}
-          userDB={userDB}
-          path='/games'
-          component={() => <Games
+          path='/games/:gameID'
+          component={() => <SingleGame
             user={user}
-            games={games}
-            setGames={setGames}
             userDB={userDB}
           />}
         />
         <PrivateRoute
           user={user}
           registeredUser={registeredUser}
-          path='/game/:gameID'
-          component={() => <SingleGame
+          userDB={userDB}
+          path='/games'
+          component={() => <Games
             user={user}
+            games={games}
+            setGames={setGames}
             userDB={userDB}
           />}
         />

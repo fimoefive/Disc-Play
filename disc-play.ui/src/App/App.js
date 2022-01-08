@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
 import { getValidUser, getUserWithUID, } from '../helpers/data/PlayerData';
-import { getGames } from '../helpers/data/GameData';
+import { getGamesByUserID } from '../helpers/data/GameData';
 import { getMessages } from '../helpers/data/MessageForumData'
 import '../styles/App.css';
 
@@ -15,24 +15,6 @@ function App() {
   const [games, setGames] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  // const checkUser = (newUser, authed) => {
-  //   const checkStatus = Object.values(newUser);
-  //   if (checkStatus.length >= 1) {
-  //     const userArray = Object.values(newUser);
-  //     setLoggedUser(userArray[0]);
-  //   } else {
-  //     const newUserInfoObj = {
-  //       fullName: authed.displayName,
-  //       profileImage: authed.photoURL,
-  //       role: 'PLAYER',
-  //       uid: authed.uid,
-  //     };
-  //     addPlayer(newUserInfoObj).then((userResponse) => setLoggedUser(userResponse));
-  //   }
-  // };
-
-  // const getLoggedInUser = () => firebase.auth().currentUser?.uid;
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
@@ -42,14 +24,19 @@ function App() {
           uid: authed.uid,
           user: authed.email.split('@')[0]
         };
-        getUserWithUID(authed.uid).then((resp) => setUserDB(resp));
+        getUserWithUID(authed.uid).then((resp) => {
+          setUserDB(resp);
+          getGamesByUserID(resp.userID).then((gamesArray) => setGames(gamesArray));
+          console.log("get User with UID", resp);
+        });
+        // getGames().then((gamesArray) => setGames(gamesArray));
+
         getValidUser(authed.uid).then((validResp) => {
           console.log("Valid Response", validResp);
           setRegisteredUser(validResp);
         });
         // getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));
 
-        getGames().then((gamesArray) => setGames(gamesArray));
         getMessages().then((messageArray) => setMessages(messageArray));
         //store the token for later   
         // user.getIdToken().then((token) => sessionStorage.setItem("token", token));

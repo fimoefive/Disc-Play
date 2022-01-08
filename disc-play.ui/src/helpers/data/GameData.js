@@ -15,6 +15,13 @@ const getGameByID = (gameID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// TODO: Change GetGamesByUserID to getGamesByUserID
+const getGamesByUserID = (userID) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/games/GetGamesByUserID/${userID}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 const addGame = (gameObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/api/games`, gameObj)
     .then(() => getGames().then(resolve))
@@ -27,9 +34,12 @@ const deleteGame = (gameID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateGame = (gameObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/api/games/${gameObj.gameID}`, gameObj)
-    .then(() => getGames().then((gameArray) => resolve(gameArray)))
+const updateGame = (gameObj, userID) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/api/games/${gameObj.gameID}`, gameObj)
+    .then(() => getGamesByUserID(userID).then((gameArray) => {
+      console.log(gameObj);
+      resolve(gameArray)
+    }))
     .catch((error) => reject(error));
 });
 
@@ -41,6 +51,7 @@ const getSingleGame = (gameID) => new Promise((resolve, reject) => {
 
 export {
   getGames, getGameByID,
+  getGamesByUserID,
   getSingleGame, addGame,
   deleteGame, updateGame
 };

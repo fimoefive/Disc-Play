@@ -54,6 +54,15 @@ namespace Disc_Play.DataAccess
       return sql;
     }
 
+    //  GetGamesByUserID Method
+    internal List<Game> GetGamesByUserID(int userID)
+    {
+      using var db = new SqlConnection(_connectionString);
+      // sql query string
+      var sql = db.Query<Game>("SELECT * FROM [GAME] WHERE UserID = @userID", new { userID }).ToList();
+      return sql;
+    }
+
     //  GetGameByGameID Method
     //internal List<Game> GetGameByGameID(string gameID)
     //{

@@ -6,6 +6,7 @@ import GameForm from '../forms/GameForm';
 
 function Games({
   user,
+  userDB,
   games,
   setGames
 }) {
@@ -15,7 +16,7 @@ function Games({
     setAddGame((prevState) => !prevState);
   };
 
-function total(gameInfo) {
+  function total(gameInfo) {
     let hole = 0;
     hole += Number(gameInfo.hole1);
     hole += Number(gameInfo.hole2);
@@ -37,9 +38,9 @@ function total(gameInfo) {
     hole += Number(gameInfo.hole18);
 
     return hole;
-}
+  }
 
-function avg(holeInfo) {
+  function avg(holeInfo) {
     let hole = 0;
     hole += Number(holeInfo.hole1);
     hole += Number(holeInfo.hole2);
@@ -60,8 +61,8 @@ function avg(holeInfo) {
     hole += Number(holeInfo.hole17);
     hole += Number(holeInfo.hole18);
     hole /= 18;
-    return hole.toFixed(2);
-}
+    return hole.toFixed(2); // toFixed() reads as a string
+  }
 
   return (
     <>
@@ -74,6 +75,7 @@ function avg(holeInfo) {
               <GameForm
                 setGames={setGames}
                 user={user}
+                userDB={userDB}
               />
             </div>
           }
@@ -81,6 +83,7 @@ function avg(holeInfo) {
         {games.map((holeInfo) => (
           <GameCard className="gameCard"
             user={user}
+            userDB={userDB}
             key={holeInfo.gameID}
             gameID={holeInfo.gameID}
             course={holeInfo.course}
@@ -102,9 +105,9 @@ function avg(holeInfo) {
             hole16={holeInfo.hole16}
             hole17={holeInfo.hole17}
             hole18={holeInfo.hole18}
+            timeStamp={holeInfo.timeStamp}
             total={total(holeInfo)}
             avg={avg(holeInfo)}
-            // TimeStamp={TimeStamp}
             setGames={setGames}
           />
         ))}
@@ -115,6 +118,7 @@ function avg(holeInfo) {
 
 Games.propTypes = {
   user: PropTypes.any,
+  userDB: PropTypes.any,
   games: PropTypes.array,
   setGames: PropTypes.func
 };
