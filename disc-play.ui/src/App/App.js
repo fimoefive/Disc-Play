@@ -27,12 +27,12 @@ function App() {
         getUserWithUID(authed.uid).then((resp) => {
           setUserDB(resp);
           getGamesByUserID(resp.userID).then((gamesArray) => setGames(gamesArray));
-          console.log("get User with UID", resp);
+          // console.log("get User with UID", resp);
         });
         // getGames().then((gamesArray) => setGames(gamesArray));
 
         getValidUser(authed.uid).then((validResp) => {
-          console.log("Valid Response", validResp);
+          // console.log("Valid Response", validResp);
           setRegisteredUser(validResp);
         });
         // getValidUser(authed.uid).then((validResp) => setRegisteredUser(validResp));

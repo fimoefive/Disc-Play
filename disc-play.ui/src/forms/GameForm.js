@@ -349,6 +349,7 @@ GameForm.propTypes = {
     formTitle: PropTypes.string,
     user: PropTypes.any,
     userDB: PropTypes.any,
+    userID: PropTypes.any,
     gameID: PropTypes.any,
     course: PropTypes.string,
     hole1: PropTypes.number,

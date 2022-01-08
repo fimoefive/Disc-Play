@@ -95,6 +95,7 @@ function SingleGameCard({
       <h3>Strokes: {hole.hole18}</h3>
       <h2>TOTAL: {totalScore(hole)}</h2>
       <h2>Average: {gameAvg(hole)}</h2>
+      <h5>TimeStamp: {hole.timeStamp}</h5>
       <h2>{gameScore}</h2>
       <footer>&#169; 2022</footer>
     </div>
@@ -105,6 +106,7 @@ SingleGameCard.propTypes = {
   hole: PropTypes.object,
   total: PropTypes.number,
   avg: PropTypes.string,
+  timeStamp: PropTypes.any,
   gameScore: PropTypes.string,
 };
 
