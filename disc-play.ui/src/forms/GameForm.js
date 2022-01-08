@@ -58,7 +58,7 @@ const GameForm = ({
         hole16: hole16 || 0,
         hole17: hole17 || 0,
         hole18: hole18 || 0,
-        timeStamp: timeStamp,
+        timeStamp: timeStamp || new Date(),
         uid: uid || user.uid
     });
 
@@ -82,7 +82,7 @@ const GameForm = ({
         e.preventDefault();
         if (game.gameID) {
             updateGame(game, userDB.userID).then((gameArray) => {
-                // console.log("updateGame", gameArray);
+                // con[sole.log("updateGame", gameArray);
                 setGames(gameArray)
             });
         } else {

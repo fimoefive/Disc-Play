@@ -22,24 +22,21 @@ const getGamesByUserID = (userID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addGame = (gameObj) => new Promise((resolve, reject) => {
+const addGame = (gameObj, userID) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/api/games`, gameObj)
-    .then(() => getGames().then(resolve))
+    .then(() => getGamesByUserID(userID).then((gameArray) => resolve(gameArray)))
     .catch((error) => reject(error));
 });
 
-const deleteGame = (gameID) => new Promise((resolve, reject) => {
+const deleteGame = (gameID, userID) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/api/games/${gameID}`)
-    .then(() => getGames().then((gameArray) => resolve(gameArray)))
+    .then(() => getGamesByUserID(userID).then((gameArray) => resolve(gameArray)))
     .catch((error) => reject(error));
 });
 
 const updateGame = (gameObj, userID) => new Promise((resolve, reject) => {
   axios.put(`${dbUrl}/api/games/${gameObj.gameID}`, gameObj)
-    .then(() => getGamesByUserID(userID).then((gameArray) => {
-      console.log(gameObj);
-      resolve(gameArray)
-    }))
+    .then(() => getGamesByUserID(userID).then((gameArray) => resolve(gameArray)))
     .catch((error) => reject(error));
 });
 
