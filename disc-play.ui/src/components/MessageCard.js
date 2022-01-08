@@ -17,7 +17,7 @@ const MessageCard = ({
   message,
   timeStamp,
   uid,
-  setMessages,
+  setMessages
   // userDB
 }) => {
   const [editing, setEditing] = useState(false);
@@ -25,7 +25,7 @@ const MessageCard = ({
   const handleClick = (type) => {
     switch (type) {
       case 'delete':
-        deleteMessage(messageID, user.uid) // userDB.userID
+        deleteMessage(messageID) // userDB.userID
           .then(setMessages)
           .then(() => getMessages(user.uid))
           .then(setMessages);
@@ -39,16 +39,13 @@ const MessageCard = ({
     }
   };
 
-  // const timestamp = new Date().toISOString().slice(0, 10);
-  // const timeValue = timestamp.valueOf();
-
   return (
     <>
       <div className="messageCard">
         <CardBody body="true" className="card text-center">
           <CardTitle tag="h5" type="text">{message}</CardTitle>
           <CardText type="number">Date: {timeStamp}</CardText>
-          <CardText type="text">Player: {user.firstName}</CardText>
+          {/* <CardText type="text">Player: {userDB.firstName}</CardText> */}
           {user
             ? <Button color='info' user={user} onClick={() => handleClick('edit')}>
               {editing ? 'Close' : 'Edit Message'}
@@ -56,6 +53,7 @@ const MessageCard = ({
           {editing && <MessageForm
             formTitle='Edit Message'
             user={user}
+            // userDB={userDB}
             messageID={messageID}
             userID={userID}
             message={message}
@@ -76,6 +74,7 @@ const MessageCard = ({
 
 MessageCard.propTypes = {
   user: PropTypes.any,
+  // userDB: PropTypes.any,
   messageID: PropTypes.any.isRequired,
   userID: PropTypes.any,
   message: PropTypes.string.isRequired,

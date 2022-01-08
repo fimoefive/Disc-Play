@@ -13,8 +13,8 @@ import {
 import { signInUser, signOutUser } from '../helpers/auth';
 
 const NavBar = ({ user, registeredUser }) => {
-  console.log(user);
-  console.log(registeredUser);
+  // console.log(user);
+  // console.log(registeredUser);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
