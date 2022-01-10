@@ -44,7 +44,6 @@ function Home({
         <CardBody>
           {user ? authenticated() : notAuthenticated()}
           {(user && registeredUser) && isNotRegistered()}
-          {/* <PlayerForm /> */}
         </CardBody>
       </Card>
     </div>

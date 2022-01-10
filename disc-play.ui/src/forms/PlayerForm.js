@@ -13,7 +13,7 @@ function PlayerForm({
   userRole,
   setUserDB
 }) {
-    const [newPlayer, setNewPlayer] = useState({
+  const [newPlayer, setNewPlayer] = useState({
     userID: userID || null,
     firstName: firstName || '',
     lastName: lastName || '',
@@ -47,45 +47,45 @@ function PlayerForm({
         <h4>Create Player Account</h4>
         <label>First Name:</label>
         <input
-        className='ml-2'
-        name='firstName'
-        type='text'
-        placeholder='First Name'
-        value={newPlayer.firstName}
-        onChange={handleInputChange}
-        required />
-        <br/>
+          className='ml-2'
+          name='firstName'
+          type='text'
+          placeholder='First Name'
+          value={newPlayer.firstName}
+          onChange={handleInputChange}
+          required />
+        <br />
         <label>Last Name:</label>
         <input
-        className='ml-2'
-        name='lastName'
-        type='text'
-        placeholder='Last Name'
-        value={newPlayer.lastName}
-        onChange={handleInputChange}
-        required />
-        <br/>
+          className='ml-2'
+          name='lastName'
+          type='text'
+          placeholder='Last Name'
+          value={newPlayer.lastName}
+          onChange={handleInputChange}
+          required />
+        <br />
         <label>Email:</label>
         <input
-        className='ml-2'
-        name='email'
-        type='text'
-        placeholder='Email Address'
-        value={newPlayer.email}
-        onChange={handleInputChange}
-        required
+          className='ml-2'
+          name='email'
+          type='text'
+          placeholder='Email Address'
+          value={newPlayer.email}
+          onChange={handleInputChange}
+          required
         />
-        {/* <br/>
+        <br />
         <label>Role:</label>
         <input
-        className='ml-2'
-        name='userRole'
-        type='text'
-        placeholder='Role'
-        value={newPlayer.userRole}
-        onChange={handleInputChange}
-        required /> */}
-        <br/>
+          className='ml-2'
+          name='userRole'
+          type='text'
+          placeholder='Role'
+          value={newPlayer.userRole}
+          onChange={handleInputChange}
+          required />
+        <br />
         <Button color='success' type='submit'>Submit</Button>
       </form>
     </div>

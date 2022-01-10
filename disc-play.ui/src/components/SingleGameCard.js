@@ -55,48 +55,48 @@ function SingleGameCard({
 
   return (
     <div>
-      <h1>COURSE</h1>
-      <h2>{hole.course}</h2>
-      <h2>HOLE 1</h2>
-      <h3>Strokes: {hole.hole1}</h3>
-      <h2>HOLE 2 </h2>
-      <h3>Strokes: {hole.hole2}</h3>
-      <h2>HOLE 3</h2>
-      <h3>Strokes: {hole.hole3}</h3>
-      <h2>HOLE 4</h2>
-      <h3>Strokes: {hole.hole4}</h3>
-      <h2>HOLE 5</h2>
-      <h3>Strokes: {hole.hole5}</h3>
-      <h2>HOLE 6</h2>
-      <h3>Strokes: {hole.hole6}</h3>
-      <h2>HOLE 7 </h2>
-      <h3>Strokes: {hole.hole7}</h3>
-      <h2>HOLE 8</h2>
-      <h3>Strokes: {hole.hole8}</h3>
-      <h2>HOLE 9</h2>
-      <h3>Strokes: {hole.hole9}</h3>
-      <h2>HOLE 10</h2>
-      <h3>Strokes: {hole.hole10}</h3>
-      <h2>HOLE 11</h2>
-      <h3>Strokes: {hole.hole11}</h3>
-      <h2>HOLE 12</h2>
-      <h3>Strokes: {hole.hole12}</h3>
-      <h2>HOLE 13</h2>
-      <h3>Strokes: {hole.hole13}</h3>
-      <h2>HOLE 14</h2>
-      <h3>Strokes: {hole.hole14}</h3>
-      <h2>HOLE 15</h2>
-      <h3>Strokes: {hole.hole15}</h3>
-      <h2>HOLE 16</h2>
-      <h3>Strokes: {hole.hole16}</h3>
-      <h2>HOLE 17</h2>
-      <h3>Strokes: {hole.hole17}</h3>
-      <h2>HOLE 18</h2>
-      <h3>Strokes: {hole.hole18}</h3>
-      <h2>TOTAL: {totalScore(hole)}</h2>
-      <h2>Average: {gameAvg(hole)}</h2>
+      <h4>COURSE</h4>
+      <h5>{hole.course}</h5>
+      <h4>HOLE 1</h4>
+      <h5>Strokes: {hole.hole1}</h5>
+      <h3>HOLE 2 </h3>
+      <h4>Strokes: {hole.hole2}</h4>
+      <h3>HOLE 3</h3>
+      <h4>Strokes: {hole.hole3}</h4>
+      <h3>HOLE 4</h3>
+      <h4>Strokes: {hole.hole4}</h4>
+      <h3>HOLE 5</h3>
+      <h4>Strokes: {hole.hole5}</h4>
+      <h3>HOLE 6</h3>
+      <h4>Strokes: {hole.hole6}</h4>
+      <h3>HOLE 7 </h3>
+      <h4>Strokes: {hole.hole7}</h4>
+      <h3>HOLE 8</h3>
+      <h4>Strokes: {hole.hole8}</h4>
+      <h3>HOLE 9</h3>
+      <h4>Strokes: {hole.hole9}</h4>
+      <h3>HOLE 10</h3>
+      <h4>Strokes: {hole.hole10}</h4>
+      <h3>HOLE 11</h3>
+      <h4>Strokes: {hole.hole11}</h4>
+      <h3>HOLE 12</h3>
+      <h4>Strokes: {hole.hole12}</h4>
+      <h3>HOLE 13</h3>
+      <h4>Strokes: {hole.hole13}</h4>
+      <h3>HOLE 14</h3>
+      <h4>Strokes: {hole.hole14}</h4>
+      <h3>HOLE 15</h3>
+      <h4>Strokes: {hole.hole15}</h4>
+      <h3>HOLE 16</h3>
+      <h4>Strokes: {hole.hole16}</h4>
+      <h3>HOLE 17</h3>
+      <h4>Strokes: {hole.hole17}</h4>
+      <h3>HOLE 18</h3>
+      <h4>Strokes: {hole.hole18}</h4>
+      <h3>TOTAL: {totalScore(hole)}</h3>
+      <h3>Average: {gameAvg(hole)}</h3>
       <h5>TimeStamp: {hole.timeStamp}</h5>
-      <h2>{gameScore}</h2>
+      <h3>{gameScore}</h3>
       <footer>&#169; 2022</footer>
     </div>
   );

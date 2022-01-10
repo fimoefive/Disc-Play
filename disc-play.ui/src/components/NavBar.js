@@ -43,10 +43,6 @@ const NavBar = ({ user, registeredUser }) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
 
-            {/* <NavItem>
-              <Link className="nav-link" to="/">Home</Link>
-            </NavItem> */}
-
             {(user && registeredUser) && authenticated()}
             {
               user !== null

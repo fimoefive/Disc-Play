@@ -25,9 +25,9 @@ const MessageCard = ({
   const handleClick = (type) => {
     switch (type) {
       case 'delete':
-        deleteMessage(messageID) // userDB.userID
+        deleteMessage(messageID)
           .then(setMessages)
-          .then(() => getMessages(user.uid))
+          .then(() => getMessages(user.uid)) // userDB.userID
           .then(setMessages);
         break;
       case 'edit':

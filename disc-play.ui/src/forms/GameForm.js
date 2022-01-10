@@ -83,7 +83,6 @@ const GameForm = ({
         // debugger;
         if (game.gameID) {
             updateGame(game, userDB.userID).then((gameArray) => {
-                // con[sole.log("updateGame", gameArray);
                 setGames(gameArray)
             });
         } else {
@@ -94,7 +93,6 @@ const GameForm = ({
 
             // Clears Input Fields
             setGame({
-                // gameID: null,
                 course: '',
                 hole1: 0,
                 hole2: 0,
