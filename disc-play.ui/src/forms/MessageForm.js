@@ -32,25 +32,30 @@ function MessageForm({
     } else {
       addMessage(newMessage, userDB.userID).then((response) => {
         setMessages(response);
-        history.push('/messages');
+        history.push('/message_forum');
       });
+
+      // Clears Input Field
+      setNewMessage({
+        message: '',
+      })
     }
   };
 
   return (
     <div className="message-form">
       <form className='mt-3' id='add-message-forum' autoComplete='off' onSubmit={handleSubmit}>
-        <label>{formTitle}</label>
+        <label>{formTitle}:  </label>
         <input
           className='ml-2'
           name='message'
           type='text'
-          placeholder='message'
+          placeholder='write a message'
           value={newMessage.message}
-          onChange={handleInputChange} />
-        <br />
-        <Button color='primary' type='submit'>Submit</Button>
+          onChange={handleInputChange}
+        />
       </form>
+      <Button color='primary' type='submit'>Submit</Button>
     </div>
   );
 }

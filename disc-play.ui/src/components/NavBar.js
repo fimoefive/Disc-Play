@@ -11,6 +11,7 @@ import {
   Button
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../helpers/auth';
+// import '../styles/navBar.scss';
 
 const NavBar = ({ user, registeredUser }) => {
   // console.log(user);
@@ -30,6 +31,9 @@ const NavBar = ({ user, registeredUser }) => {
       <NavItem>
         <Link className="nav-link" to="/message_forum">Message Forum</Link>
       </NavItem>
+      {/* <NavItem>
+        <Link className="nav-link" to="/course_finder">Course Finder</Link>
+      </NavItem> */}
     </>
   );
 

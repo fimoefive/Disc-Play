@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import { deleteGame } from '../helpers/data/GameData';
 import GameForm from '../forms/GameForm';
+// import '../styles/games.scss';
 
 const GameCard = ({
     user,

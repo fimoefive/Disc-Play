@@ -86,6 +86,15 @@ function Routes({
             userDB={userDB}
           />}
         />
+        {/* <PrivateRoute
+          user={user}
+          registeredUser={registeredUser}
+          path='/course_finder'
+          component={() => <CourseFinder
+            user={user}
+            userDB={userDB}
+          />}
+        /> */}
       </Switch>
     </>
   );
