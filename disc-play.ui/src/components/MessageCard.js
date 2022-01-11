@@ -12,13 +12,14 @@ import MessageForm from '../forms/MessageForm';
 
 const MessageCard = ({
   user,
+  userDB,
   messageID,
   userID,
   message,
   timeStamp,
   uid,
   setMessages
-  // userDB
+
 }) => {
   const [editing, setEditing] = useState(false);
 
@@ -53,7 +54,7 @@ const MessageCard = ({
           {editing && <MessageForm
             formTitle='Edit Message'
             user={user}
-            // userDB={userDB}
+            userDB={userDB}
             messageID={messageID}
             userID={userID}
             message={message}
@@ -74,7 +75,7 @@ const MessageCard = ({
 
 MessageCard.propTypes = {
   user: PropTypes.any,
-  // userDB: PropTypes.any,
+  userDB: PropTypes.any,
   messageID: PropTypes.any.isRequired,
   userID: PropTypes.any,
   message: PropTypes.string.isRequired,
