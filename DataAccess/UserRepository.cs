@@ -53,11 +53,11 @@ namespace Disc_Play.DataAccess
 
       var newUser2 = new
       {
-        FirstName = newUser.FirstName,
-        LastName = newUser.LastName,
-        Email = newUser.Email,
-        UID = newUser.UID,
-        UserRole = newUser.UserRole,
+        newUser.FirstName,
+        newUser.LastName,
+        newUser.Email,
+        newUser.UID,
+        newUser.UserRole,
       };
 
       var sql = @"INSERT into [USER](FirstName,LastName,Email,UID,UserRole)

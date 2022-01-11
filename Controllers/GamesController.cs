@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class GamesController : Controller
   {
-    GameRepository _repo;
+    public readonly GameRepository _repo;
 
     public GamesController(GameRepository repo)
     {

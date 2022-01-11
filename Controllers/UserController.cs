@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class UserController : Controller  // ControllerBase
   {
-    UserRepository _repo;
+    public readonly UserRepository _repo;
 
     public UserController(UserRepository repo)
     {
@@ -94,7 +94,7 @@ namespace Disc_Play.Controllers
 
     // GET: validateUse/{UID}
     [HttpGet("validateUser/{uID}")]
-    public bool validateUser(string uID)
+    public bool ValidateUser(string uID)
     {
       return _repo.IsAUser(uID);
     }

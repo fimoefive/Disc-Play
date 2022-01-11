@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class MessagesController : Controller
   {
-    MessageRepository _repo;
+    public readonly MessageRepository _repo;
 
     public MessagesController(MessageRepository repo)
     {
