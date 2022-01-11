@@ -31,7 +31,7 @@ function MessageForm({
     if (newMessage.messageID) {
       updateMessage(newMessage).then(setMessages);
     } else {
-      addMessage(newMessage, newMessage.userID).then((response) => {
+      addMessage(newMessage, userDB.userID).then((response) => {
         setMessages(response);
         history.push('/message_forum');
       });

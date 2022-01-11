@@ -34,7 +34,18 @@ namespace Disc_Play.DataAccess
     {
       using var db = new SqlConnection(_connectionString);
 
-      var messages = db.Query<MessageForum>(@"SELECT * FROM [MESSAGE_FORUM]").ToList();
+      var messages = db.Query<MessageForum>(@"
+            SELECT 
+	          [MESSAGE_FORUM].UserID, 
+	          [MESSAGE_FORUM].MessageID, 
+	          [MESSAGE_FORUM].Message, 
+	          [MESSAGE_FORUM].TimeStamp,
+              [MESSAGE_FORUM].UID, 
+	          [USER].FirstName
+            FROM [MESSAGE_FORUM]
+            LEFT JOIN 
+            [USER] ON [USER].UserID=[MESSAGE_FORUM].UserID;"
+      ).ToList();
 
       return messages;
     }

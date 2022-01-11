@@ -73,9 +73,9 @@ function Games({
             : <div>
               <Button className="closeForm" color="secondary" onClick={handleClick}>CLOSE</Button>
               <GameForm
-                setGames={setGames}
                 user={user}
                 userDB={userDB}
+                setGames={setGames}
               />
             </div>
           }

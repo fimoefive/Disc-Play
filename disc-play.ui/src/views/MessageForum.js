@@ -4,7 +4,7 @@ import MessageCard from '../components/MessageCard';
 import MessageForm from '../forms/MessageForm';
 
 function MessageForum({
-  user, messages, setMessages,
+  user, userDB, messages, setMessages,
 }) {
   return (
     <div className="message-container">
@@ -12,6 +12,7 @@ function MessageForum({
       <MessageForm
         formTitle={'New Message'}
         user={user}
+        userDB={userDB}
         setMessages={setMessages}
       />
       {
@@ -19,6 +20,7 @@ function MessageForum({
           <MessageCard className="messageCard"
             key={message.messageID}
             user={user}
+            userDB={userDB}
             messageID={message.messageID}
             userID={message.userID}
             message={message.message}
@@ -34,6 +36,7 @@ function MessageForum({
 
 MessageForum.propTypes = {
   user: PropTypes.any,
+  userDB: PropTypes.any,
   messages: PropTypes.array.isRequired,
   setMessages: PropTypes.func.isRequired,
 };

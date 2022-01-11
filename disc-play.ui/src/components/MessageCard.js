@@ -46,7 +46,7 @@ const MessageCard = ({
         <CardBody body="true" className="card text-center">
           <CardTitle tag="h5" type="text">{message}</CardTitle>
           <CardText type="number">Date: {timeStamp}</CardText>
-          {/* <CardText type="text">Player: {userDB.firstName}</CardText> */}
+          <CardText type="text">Player: {userDB.firstName}</CardText>
           {user
             ? <Button color='info' user={user} onClick={() => handleClick('edit')}>
               {editing ? 'Close' : 'Edit Message'}
