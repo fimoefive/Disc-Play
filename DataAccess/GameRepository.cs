@@ -11,23 +11,14 @@ namespace Disc_Play.DataAccess
 {
   public class GameRepository
   {
-    //  Game Static List Method
-    //static List<Game> _games = new List<Game>();
+
     readonly string _connectionString;
 
     //  Connection configuration string in Startup
     public GameRepository(IConfiguration config)
     {
       _connectionString = config.GetConnectionString("DiscPlay");
-      //LoadAllGames();
     }
-
-    //  SQL Queries all Games.ToList
-    //internal void LoadAllGames()
-    //{
-    //  using var db = new SqlConnection(_connectionString);
-    //  _games = db.Query<Game>("SELECT * FROM GAME").ToList();
-    //}
 
     //  GetALL Games Method
     internal List<Game> GetAllGames()
@@ -38,12 +29,6 @@ namespace Disc_Play.DataAccess
 
       return games;
     }
-
-    //  GetGameByID Method
-    //internal IEnumerable<Game> GetGameByID(int gameID)
-    //{
-    //  return _games.Where(game => game.GameID == gameID);
-    //}
 
     //  GetByIDFromDB Method
     internal Game GetByGameIDFromDB(int gameID)
@@ -62,21 +47,6 @@ namespace Disc_Play.DataAccess
       var sql = db.Query<Game>("SELECT * FROM [GAME] WHERE UserID = @userID", new { userID }).ToList();
       return sql;
     }
-
-    //  GetGameByGameID Method
-    //internal List<Game> GetGameByGameID(string gameID)
-    //{
-    //  using var db = new SqlConnection(_connectionString);
-    //  var temp = db.Query<Game>("SELECT * FROM GAME WHERE GameID = @gameID", new { gameID }).ToList();
-    //  return temp;
-    //}
-
-    //  GetCourseFromList Method
-    //internal IEnumerable<Game> GetCourseFromList(string course)
-    //{
-    //  var temp = _games.Where(game => game.Course == course);
-    //  return temp;
-    //}
 
     //  GetCourseFromDB Method
     internal Game GetCourseFromDB(string course)

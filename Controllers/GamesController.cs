@@ -27,13 +27,6 @@ namespace Disc_Play.Controllers
       return _repo.GetAllGames();
     }
 
-    // GET: GamesController/Details/5
-    //[HttpGet("GetGameByGameID/{gameID}")]
-    //public List<Game> GetGameByGameID(string gameID)
-    //{
-    //  return _repo.GetGameByGameID(gameID);
-    //}
-
     // GET: GamesController/GameID
     [HttpGet("{gameID}")]
     public IActionResult GETGameByID(int gameID)
