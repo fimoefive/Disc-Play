@@ -11,23 +11,14 @@ namespace Disc_Play.DataAccess
 {
   public class UserRepository
   {
-    //  User Static List Method
-    //static List<User> _users = new List<User>();
+
       readonly string _connectionString;
 
       // Connection configuration string in Startup
       public UserRepository(IConfiguration config)
       {
         _connectionString = config.GetConnectionString("DiscPlay");
-        //LoadAllUsers();
       }
-
-    // LoadAllUsers from SQL DB.ToList Method
-    //internal void LoadAllUsers()
-    //{
-    //  using var db = new SqlConnection(_connectionString);
-    //  _users = db.Query<User>("SELECT * FROM USER").ToList();
-    //}
 
     // GetALL Method
     internal List<User> GetAllUsers()
@@ -39,20 +30,6 @@ namespace Disc_Play.DataAccess
       return users;
     }
 
-    // GetByID Method
-    //internal IEnumerable<User> GetByID(int userID)
-    //{
-    //  return _users.Where(user => user.UserID == userID);
-    //}
-
-    // GetUserByUserID Method
-    //internal List<User> GetUserByUserID(string userID)
-    //{
-    //  using var db = new SqlConnection(_connectionString);
-    //  var temp = db.Query<User>("SELECT * FROM USER WHERE UserID = @userID", new { userID }).ToList();
-    //  return temp;
-    //}
-
     // GetUserByIDFromDB Method
     internal User GetUserByIDFromDB(int userID)
     {
@@ -60,13 +37,6 @@ namespace Disc_Play.DataAccess
       var user = db.QueryFirstOrDefault<User>("SELECT * FROM [USER] WHERE UserID = @userID", new { userID });
       return user;
     }
-
-    // GetUserByNameFromList Method
-    //internal IEnumerable<User> GetUserByNameFromList(string firstName)
-    //{
-    //  var tempUser = _users.Where(user => user.FirstName == firstName); //&& user => user.LastName == LastName
-    //  return tempUser;
-    //}
 
     // GetUserByNameFromDB Method
     internal User GetUserByNameFromDB(string firstName)
@@ -83,11 +53,11 @@ namespace Disc_Play.DataAccess
 
       var newUser2 = new
       {
-        FirstName = newUser.FirstName,
-        LastName = newUser.LastName,
-        Email = newUser.Email,
-        UID = newUser.UID,
-        UserRole = newUser.UserRole,
+        newUser.FirstName,
+        newUser.LastName,
+        newUser.Email,
+        newUser.UID,
+        newUser.UserRole,
       };
 
       var sql = @"INSERT into [USER](FirstName,LastName,Email,UID,UserRole)
@@ -95,6 +65,8 @@ namespace Disc_Play.DataAccess
                         VALUES (@FirstName, @LastName, @Email, @UID, @UserRole)";
 
       var ID = db.ExecuteScalar(sql, newUser2);
+      //var ID = db.ExecuteScalar<int>(sql, newUser2);
+      //newUser.UserID = ID;
     }
 
     //  DELETE User Method

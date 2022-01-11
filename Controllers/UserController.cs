@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class UserController : Controller  // ControllerBase
   {
-    UserRepository _repo;
+    public readonly UserRepository _repo;
 
     public UserController(UserRepository repo)
     {
@@ -27,13 +27,6 @@ namespace Disc_Play.Controllers
       return _repo.GetAllUsers();
     }
 
-    // GET: GETBYUSERID UserController/userID/{id}
-    //[HttpGet("GETBYUSERID/{userID}")]
-    //public List<User> GETBYUSERID(string userID)
-    //{
-    //  return _repo.GetUserByUserID(userID);
-    //}
-
     // GET: UserController/{ID}
     [HttpGet("{ID}")]
     public IActionResult GETUSERBYID(int ID)
@@ -42,17 +35,10 @@ namespace Disc_Play.Controllers
 
       if (user == null)
       {
-        return NotFound($"No user with the ID of {ID} was found");
+        return NotFound($"No user with the ID {ID} was found");
       }
       return Ok(user);
     }
-
-    //  GET: User/FirstName
-    //[HttpGet("CGetUserFirstFromList/{firstName}")]
-    //public IEnumerable<User> CGetUserFirstFromList(string firstName)
-    //{
-    //  return _repo.GetUserByNameFromList(firstName);
-    //}
 
     [HttpGet("CGetUserByNameFromDB/{firstName}")]
     public User CGetUserByNameFromDB(string firstName)
@@ -68,11 +54,11 @@ namespace Disc_Play.Controllers
          string.IsNullOrEmpty(newUser.LastName) ||
          string.IsNullOrEmpty(newUser.Email))
       {
-        return BadRequest("User information fields and Payment ID are required");
+        return BadRequest("User information fields are required");
       }
       _repo.Add(newUser);
 
-        return Created($"api/user/{newUser.UserID}", newUser);
+       return Created($"api/user/{newUser.UserID}", newUser);
     }
 
     // GET: UserController/Edit/{ID}
@@ -108,7 +94,7 @@ namespace Disc_Play.Controllers
 
     // GET: validateUse/{UID}
     [HttpGet("validateUser/{uID}")]
-    public bool validateUser(string uID)
+    public bool ValidateUser(string uID)
     {
       return _repo.IsAUser(uID);
     }

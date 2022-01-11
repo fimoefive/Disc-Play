@@ -24,9 +24,10 @@ function MessageForm({
 
   const history = useHistory();
 
+  // debugger;
   const handleSubmit = (e) => {
     e.preventDefault();
-    debugger;
+
     if (newMessage.messageID) {
       updateMessage(newMessage).then(setMessages);
     } else {
@@ -54,8 +55,8 @@ function MessageForm({
           value={newMessage.message}
           onChange={handleInputChange}
         />
+        <Button color='primary' type='submit'>Submit</Button>
       </form>
-      <Button color='primary' type='submit'>Submit</Button>
     </div>
   );
 }

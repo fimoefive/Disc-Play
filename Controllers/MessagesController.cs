@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class MessagesController : Controller
   {
-    MessageRepository _repo;
+    public readonly MessageRepository _repo;
 
     public MessagesController(MessageRepository repo)
     {
@@ -27,19 +27,6 @@ namespace Disc_Play.Controllers
       return _repo.GetAllMessages();
     }
 
-    // GET: MessagesController/Details/5
-    //public ActionResult Details(int ID)
-    //{
-    //  return View();
-    //}
-
-    // GETMessageID: MessagesController/{MessageID}
-    //[HttpGet("GetMessageByMessageID/{messageID}")]
-    //public List<MessageForum> GETMessageByMessageID(string messageID)
-    //{
-    //  return _repo.GetMessageByMessageID(messageID);
-    //}
-
     // GET: MessageID IACTION
     [HttpGet("{messageID}")]
     public IActionResult GetMessageBYID(int messageID)
@@ -52,7 +39,6 @@ namespace Disc_Play.Controllers
       }
       return Ok(message);
     }
-
 
     // POST: MessagesController/CreateMessage
     [HttpPost]
@@ -76,7 +62,7 @@ namespace Disc_Play.Controllers
 
       if (messageUpdate == null)
       {
-        return NotFound($"Could not find message with ID of {ID} to update");
+        return NotFound($"Could not find message with ID {ID} to update");
       }
       var updatedMessage = _repo.UpdateMessage(ID, message);
 

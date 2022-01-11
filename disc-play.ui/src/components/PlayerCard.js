@@ -28,7 +28,7 @@ function PlayerCard({
     <div>
       <Card className='player-card'>
         <CardBody>
-          <CardTitle tag="h3">Player Name {userDB.firstName} {userDB.lastName}</CardTitle>
+          <CardTitle tag="h3">Player Name: {userDB.firstName} {userDB.lastName}</CardTitle>
           <CardText>Email: {userDB.email}</CardText>
           <CardText>Role: {userDB.userRole}</CardText>
           <Button

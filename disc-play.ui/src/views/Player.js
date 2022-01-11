@@ -48,6 +48,7 @@ function Player({ user, userDB, setUserDB }) {
   return (
     <div>
       <h2>Player Profile</h2>
+      {/* toFixed() reads as a string parsed error */}
       <h2>Player Average: {playerAverage.toFixed(2)}</h2>
       <ProfileContainer>
         {

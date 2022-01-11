@@ -61,7 +61,7 @@ function Games({
     hole += Number(holeInfo.hole17);
     hole += Number(holeInfo.hole18);
     hole /= 18;
-    return hole.toFixed(2); // toFixed() reads as a string
+    return hole.toFixed(2); // toFixed() reads as a string parsed error
   }
 
   return (
@@ -73,9 +73,9 @@ function Games({
             : <div>
               <Button className="closeForm" color="secondary" onClick={handleClick}>CLOSE</Button>
               <GameForm
-                setGames={setGames}
                 user={user}
                 userDB={userDB}
+                setGames={setGames}
               />
             </div>
           }

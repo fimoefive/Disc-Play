@@ -13,7 +13,7 @@ namespace Disc_Play.Controllers
   [ApiController]
   public class GamesController : Controller
   {
-    GameRepository _repo;
+    public readonly GameRepository _repo;
 
     public GamesController(GameRepository repo)
     {
@@ -26,13 +26,6 @@ namespace Disc_Play.Controllers
     {
       return _repo.GetAllGames();
     }
-
-    // GET: GamesController/Details/5
-    //[HttpGet("GetGameByGameID/{gameID}")]
-    //public List<Game> GetGameByGameID(string gameID)
-    //{
-    //  return _repo.GetGameByGameID(gameID);
-    //}
 
     // GET: GamesController/GameID
     [HttpGet("{gameID}")]
